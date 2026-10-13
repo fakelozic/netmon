@@ -1,0 +1,141 @@
+   No        Time  From                   To                     Proto    Bytes  What is happening
+   17    2.014499  127.0.0.1:51008        127.0.0.2:18080        TCP          74  Opens a connection (SYN) — handshake 1 of 3
+      Ethernet  [0..14]  00:00:00:00:00:00 → 00:00:00:00:00:00, type=0x0800
+        Destination MAC  [0..6]  00:00:00:00:00:00
+            What: Helps deliver this packet to a device or listening group on the local network, using its hardware address (MAC address).
+            Here: All zeros: no device address is supplied.
+        Source MAC  [6..12]  00:00:00:00:00:00
+            What: Gives the sending device's hardware address (MAC address) on this local network, so local replies can find it.
+            Here: All zeros: no device address is supplied.
+        EtherType  [12..14]  0x0800
+            What: Tells the receiver which kind of packet is inside this Ethernet packet, such as IPv4 or ARP.
+            Here: 0x0800 selects IPv4.
+      IPv4  [14..34]  127.0.0.1 → 127.0.0.2, ttl=64 len=60
+        Version  [14..15]  4
+            What: Tells the receiver which IP rules to use to read the packet.
+            Here: 4 selects IPv4 header rules.
+        Header length  [14..15]  20
+            What: Tells the receiver where the IPv4 header ends and the carried data begins.
+            Here: 20 bytes: the fixed 20-byte header plus 0 bytes of extra settings.
+        Differentiated services code point  [15..16]  0
+            What: Asks routers to give this packet a particular priority or handling policy.
+        Explicit congestion notification  [15..16]  0
+            What: Lets a router mark a packet when it is too busy, so the computers can slow down without losing that packet.
+            Here: This packet does not support a router marking it to report too much traffic.
+        Total length  [16..18]  60
+            What: Tells the receiver how many bytes belong to this IPv4 packet, including its header.
+            Here: 60 bytes belong to this IPv4 packet. The Ethernet or capture header is extra.
+        Identification  [18..20]  0x227f
+            What: Helps the receiver join pieces of a split packet, called fragments, back together.
+        Flags  [20..22]  0x4000 [DF]
+            What: Controls whether routers may split this packet and whether more pieces follow.
+          Don't fragment  [20..22]  1
+              What: Tells routers to drop the packet if it is too large for the next link, instead of splitting it.
+              Here: Set. A router must drop this packet if its next link needs smaller packets.
+              Why:  A rejection can reveal a path's size limit.
+          More fragments  [20..22]  0
+              What: Tells the receiver that more pieces of this split IPv4 packet follow.
+              Here: Not set.
+        Fragment offset  [20..22]  0
+            What: Tells the receiver where these data bytes fit in the original packet, measured in bytes.
+            Here: These data bytes start at the beginning of the original packet. This can be an unsplit packet or its first piece.
+        Time to live  [22..23]  64
+            What: Stops packets circling forever. Each router lowers this counter and drops the packet if it reaches zero.
+            Here: The counter is 64. Systems often start at 64, 128 or 255, so this packet has probably crossed no routers.
+            Why:  A changed count from the same computer may suggest a route change. The starting count can also change.
+        Protocol  [23..24]  6
+            What: Tells the receiver what kind of data follows the IPv4 header, such as TCP or UDP.
+            Here: 6 tells the receiver to read TCP next.
+        Header checksum  [24..26]  0x1a3a (correct)
+            What: Helps detect damaged IPv4 header bytes using a calculated check number, called a checksum.
+            Here: 0x1a3a (correct). netmon checks the IPv4 header bytes, including this checksum, but not the carried data.
+            Why:  An incorrect result suggests damaged header bytes or a checksum filled after capture. It does not check the carried data or prove who sent the packet.
+        Source IP address  [26..30]  127.0.0.1
+            What: Gives the IP address the packet claims to come from, so a reply can be sent back.
+            Here: 127.0.0.1 is loopback: traffic stays on this computer.
+            Why:  The address alone does not authenticate the sender.
+        Destination IP address  [30..34]  127.0.0.2
+            What: Gives the IP address routers use to deliver this packet to its destination.
+            Here: 127.0.0.2 is loopback: traffic stays on this computer.
+      TCP  [34..74]  51008 → 18080 [SYN] seq=1455604178 ack=0 win=65495
+        Source port  [34..36]  51008
+            What: Identifies the sending program's port. The IP address finds the computer, and the port helps find the program on it.
+            Here: Port 51008 is in the range set aside for temporary or private use. The operating system often picks a temporary port for a client.
+        Destination port  [36..38]  18080
+            What: Helps deliver data to the right program. The IP address finds the computer, and the port helps find the program on it.
+            Here: Port 18080 has no usual service listed in netmon. It may be chosen by the program or temporarily assigned by the operating system.
+        Sequence number  [38..42]  1455604178
+            What: Numbers data bytes so the receiver can put them in order and notice gaps. It gives the first data byte number, or the starting number when SYN is set.
+            Here: The starting number is 1455604178. SYN uses this number, so the first data byte starts at the next number.
+        Acknowledgment number  [42..46]  0
+            What: Returns a byte number to the other computer when ACK is set. In normal data exchange, it confirms earlier bytes arrived and names the next expected byte.
+            Here: 0 does not confirm receipt because ACK is not set.
+        Data offset  [46..47]  40
+            What: Tells the receiver where the TCP header ends and the data begins, including any extra header settings.
+            Here: 40 bytes belong to the TCP header, including 20 bytes of extra settings.
+        Flags  [46..48]  0x0002 [SYN]
+            What: Tells the other computer whether to open or close a connection, confirm receipt, or handle data specially.
+          CWR  [47..48]  0
+              What: Reports that the sender slowed down after a busy router was reported. During connection setup it helps agree to use congestion reports.
+              Here: Not set.
+          ECE  [47..48]  0
+              What: Reports that a router marked traffic as too busy. During connection setup it helps agree to use congestion reports.
+              Here: Not set.
+          URG  [47..48]  0
+              What: Marks the urgent pointer as valid, so the receiver can find the end of data needing special attention.
+              Here: Not set.
+          ACK  [47..48]  0
+              What: Marks the acknowledgment number as valid, so the other computer can see which bytes arrived.
+              Here: Not set.
+          PSH  [47..48]  0
+              What: Asks the receiver to pass the waiting data to its program without waiting for more data.
+              Here: Not set.
+          RST  [47..48]  0
+              What: Stops the connection immediately or refuses an attempted connection.
+              Here: Not set.
+              Why:  A reset does not by itself reveal why the connection fails.
+          SYN  [47..48]  1
+              What: Starts opening a connection by sharing the byte number from which this computer will count.
+              Here: Set. The sender proposes a starting byte number to open a connection.
+          FIN  [47..48]  0
+              What: Tells the other computer that the sender has finished sending data. It can still receive data.
+              Here: Not set.
+              Why:  The other direction can remain open.
+        Window  [48..50]  65495
+            What: Tells the sender how much more data the receiver says it can take now. This keeps a fast sender from overwhelming a slow receiver.
+            Here: The receiver offers space for 65,495 data bytes. Opening packets always use the window without a multiplier.
+            Why:  A zero window asks the other computer to pause sending ordinary data until space is available.
+        Checksum  [50..52]  0xfe31
+            What: Helps detect damaged TCP header or data bytes using a calculated check number, called a checksum. It also covers the IP addresses.
+            Here: 0xfe31 has not been checked by netmon. A network card may calculate it after capture, so an outgoing packet can appear to have a bad checksum.
+            Why:  A checksum can detect accidental damage, but it does not prove who sent the packet.
+        Urgent pointer  [52..54]  0
+            What: Locates the end of urgent data, meaning data needing special attention, when URG is set. It is an offset from this packet's sequence number.
+            Here: This pointer is ignored because URG is not set.
+        Options  [54..74]  02 04 ff d7 04 02 08 0a 62 28 74 cf 00 00 00 00 01 03 03 0a
+            What: Carries extra TCP settings or reports, such as a data size limit or which out-of-order bytes arrived.
+          Maximum segment size  [56..58]  65495
+              What: Tells the other computer the largest amount of TCP data this computer can receive in one packet, excluding IP and TCP headers.
+              Here: The sender can receive up to 65,495 TCP data bytes in one packet. IP and TCP header bytes are extra.
+              Why:  A smaller value can be normal on a path that needs smaller packets.
+          Selective acknowledgment permitted  [58..60]  1
+              What: Allows the other computer to report which data arrived beyond a gap, so missing bytes can be sent again.
+          Timestamps  [60..70]  08 0a 62 28 74 cf 00 00 00 00
+              What: Helps measure how long a reply takes and distinguish old packets from current ones, using counters from both computers.
+            Timestamp value  [62..66]  1646818511
+                What: Gives the sender's current timing counter so the other computer can echo it back.
+            Timestamp echo  [66..70]  0
+                What: Copies a timing counter received from the other computer so it can measure how long the exchange took.
+          No operation  [70..71]  1
+              What: Adds one padding byte so another TCP option can start at a convenient position.
+          Window scale  [73..74]  10
+              What: Offers a multiplier for later receive windows, so TCP can advertise space larger than its fixed window field allows.
+              Here: Scale 10 offers a multiplier of 1,024 for later windows. It takes effect only if both computers offer scaling during setup.
+              Why:  Both computers must offer scaling during setup before it can be used. Opening packets always use the unscaled window.
+        Payload size  [74..74]  0
+            What: Shows how many data bytes the packet headers declare after the TCP header. A cut-short capture may contain fewer bytes.
+0000  00 00 00 00 00 00 00 00 00 00 00 00 08 00 45 00  ..............E.
+0010  00 3c 22 7f 40 00 40 06 1a 3a 7f 00 00 01 7f 00  .<".@.@..:......
+0020  00 02 c7 40 46 a0 56 c2 c1 d2 00 00 00 00 a0 02  ...@F.V.........
+0030  ff d7 fe 31 00 00 02 04 ff d7 04 02 08 0a 62 28  ...1..........b(
+0040  74 cf 00 00 00 00 01 03 03 0a                    t.........

@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cargo build *)",
+      "Bash(cargo test *)",
+      "Bash(cargo clippy *)",
+      "Bash(cargo fmt *)",
+      "Bash(cargo tree *)",
+      "Bash(tshark -r *)",
+      "Bash(capinfos *)",
+      "Bash(./target/release/netmon *)",
+      "Bash(./target/debug/netmon *)"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+# Parallel branches each add one module line to these two files.
+# "union" keeps the lines from both sides instead of reporting a conflict.
+src/lib.rs merge=union
+src/explain.rs merge=union

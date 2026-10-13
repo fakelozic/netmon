@@ -1,0 +1,17 @@
+{
+  "version": "0.1.0",
+  "mode": "live",
+  "source": "loopback-mixed.pcapng (replay)",
+  "state": "running",
+  "error": null,
+  "started": "2026-10-13T00:00:00Z",
+  "packets": 0,
+  "dropped": 0,
+  "bytes": 0,
+  "conversations": 0,
+  "alerts": 0,
+  "rate": [],
+  "log_dir": "/mock/session",
+  "recording": "off",
+  "problem": null
+}

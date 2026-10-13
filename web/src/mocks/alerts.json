@@ -1,0 +1,75 @@
+{
+  "total": 5,
+  "alerts": [
+    {
+      "id": 1,
+      "kind": "port_scan",
+      "severity": "warning",
+      "time": 2.014553,
+      "clock": "00:00:02.015",
+      "title": "Port scan pattern from 8.8.8.8",
+      "seen": "8.8.8.8 sends TCP connection requests or UDP packets to 20 different ports on 10.0.0.2 within the last 10.0 s.",
+      "why": "TCP opens a reliable byte stream and UDP sends independent messages to ports, the numbered entry points for network services. Trying many ports quickly can reveal which services are listening. Diagnostic tools and software on your own computer can also do this, so the pattern does not prove an attack.",
+      "next": "Check whether you or an administrator ran a service discovery tool, and inspect the first and triggering packets for the destination ports.",
+      "packet": 20,
+      "first_packet": 1,
+      "subject": "8.8.8.8"
+    },
+    {
+      "id": 2,
+      "kind": "cleartext_credentials",
+      "severity": "serious",
+      "time": 2.221735,
+      "clock": "00:00:02.222",
+      "title": "Unencrypted HTTP login pattern at 10.0.0.53",
+      "seen": "Server 10.0.0.53, port 80. An HTTP request carries an authorization header. Login credentials are sent without encryption, and their values are hidden.",
+      "why": "HTTP carries web requests and replies. Without Transport Layer Security (TLS), someone who can read this traffic can copy the login credentials. This observation shows exposed credentials, not that someone has used them.",
+      "next": "Check that the client uses HTTPS, which protects HTTP with TLS, before sending credentials. Check the server or proxy configuration for an encrypted login endpoint.",
+      "packet": 30,
+      "first_packet": 30,
+      "subject": "10.0.0.53"
+    },
+    {
+      "id": 3,
+      "kind": "arp_change",
+      "severity": "serious",
+      "time": 2.222266,
+      "clock": "00:00:02.222",
+      "title": "ARP mapping changes for 10.0.0.1 (gateway)",
+      "seen": "ARP now associates 10.0.0.1 with 02:00:00:00:00:02, after previously associating it with 02:00:00:00:00:01.",
+      "why": "Address Resolution Protocol (ARP) maps an IPv4 address to a MAC address, the address used to reach a device on the local link. A changed mapping can redirect traffic to a different device. It also happens innocently when a device is replaced or an address is reassigned.",
+      "next": "Compare both MAC addresses with the device or router's settings and check for a planned replacement or address reassignment. Repeated switching without an expected change deserves investigation.",
+      "packet": 41,
+      "first_packet": 40,
+      "subject": "10.0.0.1"
+    },
+    {
+      "id": 4,
+      "kind": "suspicious_dns",
+      "severity": "notice",
+      "time": 2.428845,
+      "clock": "00:00:02.429",
+      "title": "Unusual DNS name from 10.0.0.2",
+      "seen": "10.0.0.2 sends a DNS query, a request to look up a name, with 37 characters in the name and 32 in its longest label (the part between dots). A 32-character label has 5.00 bits per character of entropy, a measure of character variety.",
+      "why": "DNS tunnelling hides other data inside name lookups to carry it past network controls. Name-guessing malware tries many possible names to find a server it can contact. Content networks also use long random names, and these patterns do not prove either activity.",
+      "next": "Check which program makes these lookups and whether the domain belongs to a service you use. Compare nearby queries and replies to see whether names keep changing or repeatedly fail.",
+      "packet": 50,
+      "first_packet": 50,
+      "subject": "10.0.0.2"
+    },
+    {
+      "id": 5,
+      "kind": "unexpected_inbound",
+      "severity": "warning",
+      "time": 2.635795,
+      "clock": "00:00:02.636",
+      "title": "Accepted inbound connection request from 8.8.8.8",
+      "seen": "8.8.8.8 sends a TCP SYN connection request to this computer at 10.0.0.2, port 22 (usually SSH). This computer replies with SYN+ACK.",
+      "why": "TCP starts a connection with a SYN request and a SYN+ACK acceptance reply. This reply indicates a listening service accepts a request from a public address, although the final handshake step has not yet been observed. The service may be intentional, so this is not proof of an intrusion.",
+      "next": "Check which program listens on this port and whether you intend it to accept outside connections. Check the host firewall and router forwarding rules for that service.",
+      "packet": 61,
+      "first_packet": 60,
+      "subject": "8.8.8.8"
+    }
+  ]
+}

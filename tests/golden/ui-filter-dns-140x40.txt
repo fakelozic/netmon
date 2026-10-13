@@ -1,0 +1,40 @@
+netmon FILE  75 packets / 8 shown  3.044691 s  17,764 bytes
+loopback-mixed.pcapng  filter: dns
+[1] Packets                                                                                                             ? help  g glossary
+┌Packets───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│No    Time         From                  To                    Proto   Bytes  What is happening                                           │
+│>9    1.020843     127.0.0.2:55921       127.0.0.53:53         DNS     94     Asks: what is the IPv4 address of example.com?              │
+│ 10   1.077328     127.0.0.53:53         127.0.0.2:55921       DNS     114    Answer: example.com is 172.66.147.243 (and 1 more)          │
+│ 11   1.292935     127.0.0.2:48891       127.0.0.53:53         DNS     94     Asks: what is the IPv6 address of example.com?              │
+│ 12   1.300109     127.0.0.53:53         127.0.0.2:48891       DNS     110    Answer: example.com is 2606:4700:8d95:72db:f2de:b99:ef6b:ff…│
+│ 13   1.515748     127.0.0.2:44337       127.0.0.53:53         DNS     97     Asks: what is the IPv4 address of www.github.com?           │
+│ 14   1.577348     127.0.0.53:53         127.0.0.2:44337       DNS     115    Answer: www.github.com is 20.207.73.82 (via github.com)     │
+│ 15   1.793236     127.0.0.2:35167       127.0.0.53:53         DNS     114    Asks: what is the IPv4 address of nonexistent-netmon-test.i…│
+│ !16  1.793331     127.0.0.53:53         127.0.0.2:35167       DNS     102    Answer: nonexistent-netmon-test.invalid does not exist (NXD…│
+│                                                                                                                                          │
+│                                                                                                                                          │
+│                                                                                                                                          │
+│                                                                                                                                          │
+│                                                                                                                                          │
+│                                                                                                                                          │
+│                                                                                                                                          │
+│                                                                                                                                          │
+│                                                                                                                                          │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Asks: what is the IPv4 address of example.com?
+┌Layers - Ethernet──────────────────────────────────┐┌Explain──────────────────────────────────────────────────────────────────────────────┐
+│>▸ Ethernet: 14 bytes                              ││Ethernet                                                                             │
+│ ▸ IPv4: 20 bytes                                  ││What: Ethernet delivers a frame across the local link, using hardware addresses.     │
+│ ▸ UDP: 8 bytes                                    ││                                                                                     │
+│ ▾ DNS: 52 bytes                                   ││                                                                                     │
+│     Transaction identifier: 0xf97c                ││                                                                                     │
+│   ▸ Flags: 0x0120 [RD, AD]                        ││                                                                                     │
+│     Question count: 1                             ││                                                                                     │
+│     Answer count: 0                               ││                                                                                     │
+│     Authority count: 0                            ││                                                                                     │
+└───────────────────────────────────────────────────┘└─────────────────────────────────────────────────────────────────────────────────────┘
+┌Bytes─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│0000  00 00 00 00 00 00 00 00 00 00 00 00 08 00 45 00  ..............E.                                                                   │
+│0010  00 50 7d e8 00 00 40 11 fe 7d 7f 00 00 02 7f 00  .P}...@..}......                                                                   │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+/ filter   f conversation   c clear   Space pause   Tab pane   q quit

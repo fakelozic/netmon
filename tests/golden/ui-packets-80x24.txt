@@ -1,0 +1,24 @@
+netmon FILE  75 packets / 75 shown  3.044691 s  17,764 bytes
+loopback-mixed.pcapng  filter: all
+[1] Packets                                                 ? help  g glossary
+┌Packets───────────────────────────────────────────────────────────────────────┐
+│No    Time      From → To                     Proto   What is happening       │
+│ 10   1.077     127.0.0.53:53 → 127.0.0.2:55… DNS     Answer: example.com is …│
+│ 11   1.292     127.0.0.2:48… → 127.0.0.53:53 DNS     Asks: what is the IPv6 …│
+│ 12   1.300     127.0.0.53:53 → 127.0.0.2:48… DNS     Answer: example.com is …│
+│ 13   1.515     127.0.0.2:44… → 127.0.0.53:53 DNS     Asks: what is the IPv4 …│
+│ 14   1.577     127.0.0.53:53 → 127.0.0.2:44… DNS     Answer: www.github.com …│
+│ 15   1.793     127.0.0.2:35… → 127.0.0.53:53 DNS     Asks: what is the IPv4 …│
+│ !16  1.793     127.0.0.53:53 → 127.0.0.2:35… DNS     Answer: nonexistent-net…│
+│>17   2.014     127.0.0.1:51… → 127.0.0.2:18… TCP     Opens a connection (SYN…│
+└──────────────────────────────────────────────────────────────────────────────┘
+Opens a connection (SYN) — handshake 1 of 3
+┌Layers - TCP - Tab switches───────────────────────────────────────────────────┐
+│     Source port: 51008                                                       │
+│     Destination port: 18080                                                  │
+│     Sequence number: 1455604178                                              │
+│     Acknowledgment number: 0                                                 │
+│     Data offset: 40                                                          │
+│>  ▸ Flags: 0x0002 [SYN]                                                      │
+└──────────────────────────────────────────────────────────────────────────────┘
+/ filter   f conversation   c clear   Space pause   Tab pane   q quit

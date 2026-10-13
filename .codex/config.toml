@@ -1,0 +1,9 @@
+# Codex settings for netmon.
+# Pins the model and reasoning effort used for the build tasks, so they stay the
+# same even if the global default in ~/.codex/config.toml changes later.
+model = "gpt-6.1-sol"
+model_reasoning_effort = "xhigh"
+
+# Fast mode is off (owner's choice, 2026-10-12). To turn it back on, add:
+#   service_tier = "fast"
+# It is about 2x speed and uses more of the Codex allowance.

@@ -1,0 +1,40 @@
+netmon FILE  75 packets / 75 shown  3.044691 s  17,764 bytes
+loopback-mixed.pcapng  filter: all
+[1] Packets                                                                                                             ? help  g glossary
+┌Packets───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│No    Time         From                  To                    Proto   Bytes  What is happening                                           │
+│ 1    0.000000     127.0.0.1             127.0.0.2             ICMP    98     Ping request (seq 1)                                        │
+│ 2    0.000014     127.0.0.2             127.0.0.1             ICMP    98     Ping reply (seq 1)                                          │
+│ 3    0.301174     127.0.0.1             127.0.0.2             ICMP    98     Ping request (seq 2)                                        │
+│ 4    0.301229     127.0.0.2             127.0.0.1             ICMP    98     Ping reply (seq 2)                                          │
+│ 5    0.503239     ::1                   ::1                   ICMPv6  118    Ping request (seq 1)                                        │
+│ 6    0.503252     ::1                   ::1                   ICMPv6  118    Ping reply (seq 1)                                          │
+│ 7    0.806131     ::1                   ::1                   ICMPv6  118    Ping request (seq 2)                                        │
+│ 8    0.806146     ::1                   ::1                   ICMPv6  118    Ping reply (seq 2)                                          │
+│ 9    1.020843     127.0.0.2:55921       127.0.0.53:53         DNS     94     Asks: what is the IPv4 address of example.com?              │
+│ 10   1.077328     127.0.0.53:53         127.0.0.2:55921       DNS     114    Answer: example.com is 172.66.147.243 (and 1 more)          │
+│ 11   1.292935     127.0.0.2:48891       127.0.0.53:53         DNS     94     Asks: what is the IPv6 address of example.com?              │
+│ 12   1.300109     127.0.0.53:53         127.0.0.2:48891       DNS     110    Answer: example.com is 2606:4700:8d95:72db:f2de:b99:ef6b:ff…│
+│ 13   1.515748     127.0.0.2:44337       127.0.0.53:53         DNS     97     Asks: what is the IPv4 address of www.github.com?           │
+│ 14   1.577348     127.0.0.53:53         127.0.0.2:44337       DNS     115    Answer: www.github.com is 20.207.73.82 (via github.com)     │
+│ 15   1.793236     127.0.0.2:35167       127.0.0.53:53         DNS     114    Asks: what is the IPv4 address of nonexistent-netmon-test.i…│
+│ !16  1.793331     127.0.0.53:53         127.0.0.2:35167       DNS     102    Answer: nonexistent-netmon-test.invalid does not exist (NXD…│
+│>17   2.014499     127.0.0.1:51008       127.0.0.2:18080       TCP     74     Opens a connection (SYN) — handshake 1 of 3                 │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+Opens a connection (SYN) — handshake 1 of 3
+┌Layers - TCP───────────────────────────────────────┐┌Explain──────────────────────────────────────────────────────────────────────────────┐
+│ ▸ Ethernet: 14 bytes                              ││Flags                                                                                │
+│ ▸ IPv4: 20 bytes                                  ││What: Tells the other computer whether to open or close a connection, confirm        │
+│ ▾ TCP: 40 bytes                                   ││receipt, or handle data specially.                                                   │
+│     Source port: 51008                            ││                                                                                     │
+│     Destination port: 18080                       ││                                                                                     │
+│     Sequence number: 1455604178                   ││                                                                                     │
+│     Acknowledgment number: 0                      ││                                                                                     │
+│     Data offset: 40                               ││                                                                                     │
+│>  ▸ Flags: 0x0002 [SYN]                           ││                                                                                     │
+└───────────────────────────────────────────────────┘└─────────────────────────────────────────────────────────────────────────────────────┘
+┌Bytes─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│0020  00 02 c7 40 46 a0 56 c2 c1 d2 00 00 00 00 a0 02  ...@F.V.........                                                                   │
+│0030  ff d7 fe 31 00 00 02 04 ff d7 04 02 08 0a 62 28  ...1..........b(                                                                   │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+/ filter   f conversation   c clear   Space pause   Tab pane   q quit

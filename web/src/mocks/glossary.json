@@ -1,0 +1,216 @@
+{
+  "terms": [
+    {
+      "term": "ACK",
+      "text": "A TCP flag marking the acknowledgment number as valid, normally confirming earlier bytes arrived and naming the next expected byte. netmon also shows ACK on resets, where it helps identify refused or aborted traffic."
+    },
+    {
+      "term": "ALPN",
+      "text": "A TLS setting that offers or selects how the application will communicate, such as HTTP/2. netmon reads it when it is visible in an encryption setup message."
+    },
+    {
+      "term": "ARP",
+      "text": "A request and reply that find the local hardware address for an IPv4 address. Devices need that address to send Ethernet packets on the local network."
+    },
+    {
+      "term": "cache",
+      "text": "A saved copy of information that can be reused instead of asking again. DNS record TTL tells you how long an answer may stay in a cache."
+    },
+    {
+      "term": "checksum",
+      "text": "A calculated number that helps detect accidentally damaged bytes. netmon checks the IPv4 header checksum, but a checksum does not prove who sent the packet."
+    },
+    {
+      "term": "cipher suite",
+      "text": "A named choice of encryption and related protection methods. A TLS client offers choices and the server selects one they both support."
+    },
+    {
+      "term": "congestion",
+      "text": "More traffic arriving than a router or network path can handle comfortably. Packets may be delayed, dropped, or marked so sending computers can slow down."
+    },
+    {
+      "term": "datagram",
+      "text": "One independently delivered message. UDP sends these without guaranteeing that they arrive or arrive in order."
+    },
+    {
+      "term": "DHCP",
+      "text": "A protocol that gives a device an IP address and network settings for an allowed time. netmon shows the request, offer, and acceptance so you can follow address setup."
+    },
+    {
+      "term": "DNS",
+      "text": "The system that looks up information about names, including their IP addresses. netmon shows questions and replies, including names that cannot be found."
+    },
+    {
+      "term": "DSCP",
+      "text": "An IP marking that asks routers for a particular way of handling traffic. It is a request for a policy, so it does not guarantee faster delivery."
+    },
+    {
+      "term": "ECN",
+      "text": "A way for a busy router to mark a packet instead of dropping it to report congestion. TCP can pass that warning back and slow the sender down."
+    },
+    {
+      "term": "Ethernet",
+      "text": "A protocol for sending packets between hardware addresses on a local network. netmon shows its source and destination MAC addresses before the IP header."
+    },
+    {
+      "term": "FIN",
+      "text": "A TCP flag saying the sender has finished sending data. netmon may still show traffic in the other direction while that computer finishes its reply."
+    },
+    {
+      "term": "fragment",
+      "text": "One piece of an IP packet split to fit a network link. The fragment offset tells the receiver where to put that piece when rebuilding the original packet."
+    },
+    {
+      "term": "frame",
+      "text": "A packet as carried on a local link, with its own delivery header. In netmon, Ethernet fields tell you about local delivery before IP fields tell you about the destination."
+    },
+    {
+      "term": "handshake",
+      "text": "TCP usually opens a connection with three packets: SYN asks to connect, SYN+ACK accepts and replies, and ACK confirms that reply. netmon's connection story helps you follow these steps."
+    },
+    {
+      "term": "header",
+      "text": "The instructions and addresses before a packet's carried data. netmon lists header fields in byte order so you can follow them alongside the highlighted bytes."
+    },
+    {
+      "term": "hop",
+      "text": "One forwarding step through a router toward the destination. Each router reduces the IP hop counter, preventing a packet from circulating forever."
+    },
+    {
+      "term": "hop limit",
+      "text": "IPv6's counter limiting how many routers may forward a packet. netmon can estimate routers crossed only by guessing the starting count."
+    },
+    {
+      "term": "HTTP",
+      "text": "The request-and-reply protocol used by web clients and servers. netmon reads visible HTTP/1 requests and results, while encrypted web contents need the encryption keys."
+    },
+    {
+      "term": "ICMP",
+      "text": "A protocol for network reports such as delivery failures and ping replies. netmon can show the failed packet quoted inside an error report."
+    },
+    {
+      "term": "IP address",
+      "text": "An address routers use to deliver traffic to a device's network connection. netmon shows the claimed sender and intended destination, but these addresses do not prove identity."
+    },
+    {
+      "term": "IPv4",
+      "text": "The IP version using 32-bit addresses written like 192.168.1.2. netmon shows a header checksum and TTL in its fields."
+    },
+    {
+      "term": "IPv6",
+      "text": "The IP version using 128-bit addresses written like 2001:db8::1. netmon shows a hop limit and may show extra headers after its fixed header."
+    },
+    {
+      "term": "MAC address",
+      "text": "A hardware address for an interface or group on the local network. netmon shows it in Ethernet and ARP, where it helps explain delivery to the next local device."
+    },
+    {
+      "term": "MSS",
+      "text": "The most TCP data a computer offers to receive in one packet, excluding IP and TCP headers. netmon shows this offer in the opening packets' options."
+    },
+    {
+      "term": "MTU",
+      "text": "The largest IP packet a network link can carry in one piece. A packet too large for the next link may need splitting or trigger a size error."
+    },
+    {
+      "term": "multicast",
+      "text": "Delivery to a group of devices that listen to the same address. Local name discovery can use it to ask several devices without knowing their individual addresses."
+    },
+    {
+      "term": "option",
+      "text": "An extra protocol setting beyond the fixed header fields. netmon expands TCP options to show size limits, timing counters, and reports of received byte ranges."
+    },
+    {
+      "term": "packet",
+      "text": "A unit of data sent over a network. netmon uses this everyday word for what TCP formally calls a segment, Ethernet a frame, and UDP a datagram."
+    },
+    {
+      "term": "payload",
+      "text": "The data carried after a protocol's header. It may be another protocol's packet or application data, and netmon shows its size even when the contents are encrypted."
+    },
+    {
+      "term": "port",
+      "text": "A number that helps a computer deliver traffic to the right program. The IP address finds the computer, while the port helps find the program on it."
+    },
+    {
+      "term": "private address",
+      "text": "An IP address reserved for use inside private networks. Seeing one in netmon does not prove that the device or traffic is safe."
+    },
+    {
+      "term": "protocol",
+      "text": "Rules computers agree to use to read and exchange messages. netmon's layers show which rules apply at each step, such as Ethernet, IP, and TCP."
+    },
+    {
+      "term": "QUIC",
+      "text": "A transport protocol over UDP that protects application traffic with encryption and can carry several independent conversations. netmon recognises visible headers, including unencrypted Retry and version-negotiation packets."
+    },
+    {
+      "term": "recursion",
+      "text": "A DNS server contacting other name servers to find an answer for a client. netmon shows whether the client asks for this and whether the server supports it."
+    },
+    {
+      "term": "relay",
+      "text": "A helper that forwards DHCP requests between a client's network and an address server. netmon shows its address so you can see how a reply gets back to the client."
+    },
+    {
+      "term": "router",
+      "text": "A device that forwards IP packets between networks. A packet's TTL or hop limit decreases as routers forward it."
+    },
+    {
+      "term": "RST",
+      "text": "A TCP flag that stops or refuses a connection immediately. netmon shows who sent the reset, but that packet alone may not reveal why."
+    },
+    {
+      "term": "SACK",
+      "text": "A TCP report listing byte ranges that arrived beyond a gap. netmon shows each range so you can see what the sender may still need to resend."
+    },
+    {
+      "term": "segment",
+      "text": "One TCP packet with byte numbers, control flags, and optional data. netmon uses its sequence number to follow ordered delivery."
+    },
+    {
+      "term": "sequence number",
+      "text": "A TCP number locating data bytes within a connection. netmon uses it to show order, gaps, or repeated data, and SYN and FIN each use one number too."
+    },
+    {
+      "term": "subnet",
+      "text": "A group of IP addresses treated as belonging to one network. A DHCP subnet mask helps a computer decide which destinations need a router."
+    },
+    {
+      "term": "SYN",
+      "text": "A TCP flag sharing a starting byte number when opening a connection. netmon shows it in the first packet and in the SYN+ACK reply."
+    },
+    {
+      "term": "TCP",
+      "text": "A protocol that delivers data bytes in order and resends missing bytes. netmon follows its opening handshake, byte numbers, receive windows, and closing flags."
+    },
+    {
+      "term": "TLS",
+      "text": "A protocol that sets up keys to protect data and can check a server's identity. netmon can read visible setup fields, but encrypted contents require the keys."
+    },
+    {
+      "term": "TTL",
+      "text": "IPv4's counter preventing packets from circling forever. Each router lowers it, while the similarly named DNS record TTL limits how long a saved answer can be reused."
+    },
+    {
+      "term": "UDP",
+      "text": "A protocol that sends separate messages to numbered ports without promising delivery or order. netmon shows its ports and lengths, while the application must handle any missing messages."
+    },
+    {
+      "term": "VLAN",
+      "text": "A way to divide one physical local network into separate logical networks. netmon shows the VLAN label in tagged Ethernet packets."
+    },
+    {
+      "term": "window",
+      "text": "How much more data a TCP receiver says it can take right now. It keeps a fast sender from overwhelming a slow receiver, and zero asks the sender to pause ordinary data."
+    },
+    {
+      "term": "window scale",
+      "text": "A multiplier agreed during TCP setup so a window can represent more receive space. Opening packets always use the window without this multiplier."
+    },
+    {
+      "term": "zone",
+      "text": "A group of DNS names managed together by a responsible name server. netmon shows zone update counters and timing rules in start-of-authority records."
+    }
+  ]
+}

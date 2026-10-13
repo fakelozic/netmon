@@ -1,0 +1,18 @@
+[package]
+name = "netmon"
+version = "0.1.0"
+edition = "2024"
+description = "A terminal network monitor that explains what it sees"
+
+[dependencies]
+ratatui = { version = "0.30", default-features = false, features = ["crossterm"] }
+pcap-file = "2.0"
+lexopt = "0.3"
+libc = "0.2"
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

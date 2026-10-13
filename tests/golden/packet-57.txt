@@ -1,0 +1,306 @@
+   No        Time  From                   To                     Proto    Bytes  What is happening
+   57    2.634214  127.0.0.1:38328        127.0.0.2:18443        TLS        1641  Starts encryption (TLS Client Hello) for netmon.test
+      Ethernet  [0..14]  00:00:00:00:00:00 → 00:00:00:00:00:00, type=0x0800
+        Destination MAC  [0..6]  00:00:00:00:00:00
+            What: Helps deliver this packet to a device or listening group on the local network, using its hardware address (MAC address).
+            Here: All zeros: no device address is supplied.
+        Source MAC  [6..12]  00:00:00:00:00:00
+            What: Gives the sending device's hardware address (MAC address) on this local network, so local replies can find it.
+            Here: All zeros: no device address is supplied.
+        EtherType  [12..14]  0x0800
+            What: Tells the receiver which kind of packet is inside this Ethernet packet, such as IPv4 or ARP.
+            Here: 0x0800 selects IPv4.
+      IPv4  [14..34]  127.0.0.1 → 127.0.0.2, ttl=64 len=1627
+        Version  [14..15]  4
+            What: Tells the receiver which IP rules to use to read the packet.
+            Here: 4 selects IPv4 header rules.
+        Header length  [14..15]  20
+            What: Tells the receiver where the IPv4 header ends and the carried data begins.
+            Here: 20 bytes: the fixed 20-byte header plus 0 bytes of extra settings.
+        Differentiated services code point  [15..16]  0
+            What: Asks routers to give this packet a particular priority or handling policy.
+        Explicit congestion notification  [15..16]  0
+            What: Lets a router mark a packet when it is too busy, so the computers can slow down without losing that packet.
+            Here: This packet does not support a router marking it to report too much traffic.
+        Total length  [16..18]  1627
+            What: Tells the receiver how many bytes belong to this IPv4 packet, including its header.
+            Here: 1,627 bytes belong to this IPv4 packet. The Ethernet or capture header is extra.
+        Identification  [18..20]  0x79e6
+            What: Helps the receiver join pieces of a split packet, called fragments, back together.
+        Flags  [20..22]  0x4000 [DF]
+            What: Controls whether routers may split this packet and whether more pieces follow.
+          Don't fragment  [20..22]  1
+              What: Tells routers to drop the packet if it is too large for the next link, instead of splitting it.
+              Here: Set. A router must drop this packet if its next link needs smaller packets.
+              Why:  A rejection can reveal a path's size limit.
+          More fragments  [20..22]  0
+              What: Tells the receiver that more pieces of this split IPv4 packet follow.
+              Here: Not set.
+        Fragment offset  [20..22]  0
+            What: Tells the receiver where these data bytes fit in the original packet, measured in bytes.
+            Here: These data bytes start at the beginning of the original packet. This can be an unsplit packet or its first piece.
+        Time to live  [22..23]  64
+            What: Stops packets circling forever. Each router lowers this counter and drops the packet if it reaches zero.
+            Here: The counter is 64. Systems often start at 64, 128 or 255, so this packet has probably crossed no routers.
+            Why:  A changed count from the same computer may suggest a route change. The starting count can also change.
+        Protocol  [23..24]  6
+            What: Tells the receiver what kind of data follows the IPv4 header, such as TCP or UDP.
+            Here: 6 tells the receiver to read TCP next.
+        Header checksum  [24..26]  0xbcb3 (correct)
+            What: Helps detect damaged IPv4 header bytes using a calculated check number, called a checksum.
+            Here: 0xbcb3 (correct). netmon checks the IPv4 header bytes, including this checksum, but not the carried data.
+            Why:  An incorrect result suggests damaged header bytes or a checksum filled after capture. It does not check the carried data or prove who sent the packet.
+        Source IP address  [26..30]  127.0.0.1
+            What: Gives the IP address the packet claims to come from, so a reply can be sent back.
+            Here: 127.0.0.1 is loopback: traffic stays on this computer.
+            Why:  The address alone does not authenticate the sender.
+        Destination IP address  [30..34]  127.0.0.2
+            What: Gives the IP address routers use to deliver this packet to its destination.
+            Here: 127.0.0.2 is loopback: traffic stays on this computer.
+      TCP  [34..66]  38328 → 18443 [ACK, PSH] seq=2609546218 ack=3081671884 win=64
+        Source port  [34..36]  38328
+            What: Identifies the sending program's port. The IP address finds the computer, and the port helps find the program on it.
+            Here: Port 38328 has no usual service listed in netmon. It may be chosen by the program or temporarily assigned by the operating system.
+        Destination port  [36..38]  18443
+            What: Helps deliver data to the right program. The IP address finds the computer, and the port helps find the program on it.
+            Here: Port 18443 has no usual service listed in netmon. It may be chosen by the program or temporarily assigned by the operating system.
+        Sequence number  [38..42]  2609546218
+            What: Numbers data bytes so the receiver can put them in order and notice gaps. It gives the first data byte number, or the starting number when SYN is set.
+            Here: The byte number is 2609546218. Comparing it with other packets helps locate gaps or repeated data.
+        Acknowledgment number  [42..46]  3081671884
+            What: Returns a byte number to the other computer when ACK is set. In normal data exchange, it confirms earlier bytes arrived and names the next expected byte.
+            Here: 3081671884 is the next byte number expected from the other computer. The sender reports receipt of earlier bytes in this connection.
+        Data offset  [46..47]  32
+            What: Tells the receiver where the TCP header ends and the data begins, including any extra header settings.
+            Here: 32 bytes belong to the TCP header, including 12 bytes of extra settings.
+        Flags  [46..48]  0x0018 [ACK, PSH]
+            What: Tells the other computer whether to open or close a connection, confirm receipt, or handle data specially.
+          CWR  [47..48]  0
+              What: Reports that the sender slowed down after a busy router was reported. During connection setup it helps agree to use congestion reports.
+              Here: Not set.
+          ECE  [47..48]  0
+              What: Reports that a router marked traffic as too busy. During connection setup it helps agree to use congestion reports.
+              Here: Not set.
+          URG  [47..48]  0
+              What: Marks the urgent pointer as valid, so the receiver can find the end of data needing special attention.
+              Here: Not set.
+          ACK  [47..48]  1
+              What: Marks the acknowledgment number as valid, so the other computer can see which bytes arrived.
+              Here: Set. The acknowledgment number tells the other computer which byte is expected next.
+          PSH  [47..48]  1
+              What: Asks the receiver to pass the waiting data to its program without waiting for more data.
+              Here: Set. The sender asks for the waiting data to be passed to the receiving program.
+          RST  [47..48]  0
+              What: Stops the connection immediately or refuses an attempted connection.
+              Here: Not set.
+              Why:  A reset does not by itself reveal why the connection fails.
+          SYN  [47..48]  0
+              What: Starts opening a connection by sharing the byte number from which this computer will count.
+              Here: Not set.
+          FIN  [47..48]  0
+              What: Tells the other computer that the sender has finished sending data. It can still receive data.
+              Here: Not set.
+              Why:  The other direction can remain open.
+        Window  [48..50]  64
+            What: Tells the sender how much more data the receiver says it can take now. This keeps a fast sender from overwhelming a slow receiver.
+            Here: The window field is 64. A multiplier may have been agreed during setup, so this packet alone cannot show the receive space in bytes.
+            Why:  A zero window asks the other computer to pause sending ordinary data until space is available.
+        Checksum  [50..52]  0x0451
+            What: Helps detect damaged TCP header or data bytes using a calculated check number, called a checksum. It also covers the IP addresses.
+            Here: 0x0451 has not been checked by netmon. A network card may calculate it after capture, so an outgoing packet can appear to have a bad checksum.
+            Why:  A checksum can detect accidental damage, but it does not prove who sent the packet.
+        Urgent pointer  [52..54]  0
+            What: Locates the end of urgent data, meaning data needing special attention, when URG is set. It is an offset from this packet's sequence number.
+            Here: This pointer is ignored because URG is not set.
+        Options  [54..66]  01 01 08 0a 0e ef 0d 3d fe 0f ec a8
+            What: Carries extra TCP settings or reports, such as a data size limit or which out-of-order bytes arrived.
+          No operation  [54..55]  1
+              What: Adds one padding byte so another TCP option can start at a convenient position.
+          No operation  [55..56]  1
+              What: Adds one padding byte so another TCP option can start at a convenient position.
+          Timestamps  [56..66]  08 0a 0e ef 0d 3d fe 0f ec a8
+              What: Helps measure how long a reply takes and distinguish old packets from current ones, using counters from both computers.
+            Timestamp value  [58..62]  250547517
+                What: Gives the sender's current timing counter so the other computer can echo it back.
+            Timestamp echo  [62..66]  4262456488
+                What: Copies a timing counter received from the other computer so it can measure how long the exchange took.
+        Payload size  [66..1641]  1575
+            What: Shows how many data bytes the packet headers declare after the TCP header. A cut-short capture may contain fewer bytes.
+      TLS  [66..1641]  type=22 version=0x0301 len=1570
+        Content type  [66..67]  22
+            What: Tells the receiver how to read this TLS block, such as encryption setup, an error, or protected data.
+        Record version  [67..69]  0x0301 (TLS 1.0)
+            What: Keeps older software able to recognise the TLS record format. This value alone does not tell you the negotiated TLS version.
+            Here: The field encodes TLS 1.0. An offered-version or selected-version extension may show a newer version.
+        Record length  [69..71]  1570
+            What: Tells the receiver how many bytes follow the five-byte TLS record header.
+        Handshake message  [71..1641]  type=1 len=1566
+            What: Helps the two computers agree on encryption settings and keys before sending protected data.
+          Handshake type  [71..72]  1
+              What: Tells the receiver which step of the encryption setup this message carries.
+          Handshake length  [72..75]  1566
+              What: Tells the receiver how many bytes belong to this encryption setup message, excluding its four-byte header.
+          Hello version  [75..77]  0x0303 (TLS 1.2)
+              What: Keeps older software able to recognise the hello message. An extra setting can offer or select a newer TLS version.
+              Here: The field encodes TLS 1.2. An offered-version or selected-version extension may show a newer version.
+          Random  [77..109]  ed c4 1b 42 65 73 63 c4 50 08 50 0d ac 46 a5 29 8a 59 c7 32 a7 07 09 ab c6 0d 4c cd e1 e5 e9 5a
+              What: Adds fresh random bytes to the encryption setup, helping keep separate connections from using the same keys.
+          Session identifier  [110..142]  b7 b4 26 1c 42 6a ee df d9 96 34 37 03 19 9e c0 05 b4 e5 70 70 63 bd ca 6b ce 6d 5f d9 2e d6 ae
+              What: Helps identify an earlier connection for reuse in older TLS versions. TLS 1.3 uses it for compatibility with older software.
+          Cipher suite count  [142..144]  35
+              What: Tells the server how many encryption choices the client offers.
+          Cipher suites  [144..214]  13 02 13 03 13 01 13 04 c0 2c c0 30 cc a9 cc a8 c0 ad c0 2b c0 2f c0 ac c0 23 c0 27 c0 0a c0 14 c0 09 c0 13 00 9d c0 9d 00 9c c0 9c 00 3d 00 3c 00 35 00 2f 00 9f cc aa c0 9f 00 9e c0 9e 00 6b 00 67 00 39 00 33
+              What: Lists the encryption choices the client offers so the server can pick one they both support.
+          Compression  [215..216]  00
+              What: Offers or selects a way to shrink data before encryption. TLS 1.3 requires no compression.
+          Extensions  [218..1641]  1,423 bytes
+              What: Carries extra encryption settings, such as the requested site name and supported TLS versions.
+            Extension  [218..223]  renegotiation information (type=65281), 1 byte
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+            Extension  [223..243]  server name (type=0), 16 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+              Server name  [232..243]  netmon.test
+                  What: Tells the server which site the client wants, so sites sharing an IP address can be distinguished.
+                  Here: The client asks for netmon.test. This selects a site but does not prove the server's identity.
+                  Why:  The requested site name is visible to anyone who can capture this packet.
+            Extension  [243..251]  elliptic curve point formats (type=11), 4 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+            Extension  [251..283]  supported groups (type=10), 28 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+            Extension  [283..301]  application protocols (type=16), 14 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+              Application protocol  [290..292]  h2
+                  What: Offers or selects the rules for the data sent after encryption setup, such as HTTP/2 for web traffic.
+                  Here: The client offers HTTP/2 web traffic. The server still needs to select a protocol.
+              Application protocol  [293..301]  http/1.1
+                  What: Offers or selects the rules for the data sent after encryption setup, such as HTTP/2 for web traffic.
+                  Here: The client offers HTTP/1.1 web traffic. The server still needs to select a protocol.
+            Extension  [301..305]  encrypt then MAC (type=22), 0 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+            Extension  [305..309]  extended master secret (type=23), 0 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+            Extension  [309..313]  post-handshake authentication (type=49), 0 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+            Extension  [313..357]  signature algorithms (type=13), 40 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+            Extension  [357..366]  supported versions (type=43), 5 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+              Offered version  [362..364]  0x0304 (TLS 1.3)
+                  What: Offers a TLS version the client supports so the server can choose one they both understand.
+                  Here: The client offers TLS 1.3. The server still needs to choose a version.
+              Offered version  [364..366]  0x0303 (TLS 1.2)
+                  What: Offers a TLS version the client supports so the server can choose one they both understand.
+                  Here: The client offers TLS 1.2. The server still needs to choose a version.
+            Extension  [366..372]  pre-shared key exchange modes (type=45), 2 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+            Extension  [372..1634]  key share (type=51), 1,258 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+              Key share group  [378..380]  0x11ec
+                  What: Names the method used to create a shared encryption secret without sending the secret itself.
+              Key share group  [1598..1600]  0x001d
+                  What: Names the method used to create a shared encryption secret without sending the secret itself.
+            Extension  [1634..1641]  certificate compression (type=27), 3 bytes
+                What: Identifies one extra encryption setting and how many bytes it occupies.
+0000  00 00 00 00 00 00 00 00 00 00 00 00 08 00 45 00  ..............E.
+0010  06 5b 79 e6 40 00 40 06 bc b3 7f 00 00 01 7f 00  .[y.@.@.........
+0020  00 02 95 b8 48 0b 9b 8a 83 ea b7 ae 94 cc 80 18  ....H...........
+0030  00 40 04 51 00 00 01 01 08 0a 0e ef 0d 3d fe 0f  .@.Q.........=..
+0040  ec a8 16 03 01 06 22 01 00 06 1e 03 03 ed c4 1b  ......".........
+0050  42 65 73 63 c4 50 08 50 0d ac 46 a5 29 8a 59 c7  Besc.P.P..F.).Y.
+0060  32 a7 07 09 ab c6 0d 4c cd e1 e5 e9 5a 20 b7 b4  2......L....Z ..
+0070  26 1c 42 6a ee df d9 96 34 37 03 19 9e c0 05 b4  &.Bj....47......
+0080  e5 70 70 63 bd ca 6b ce 6d 5f d9 2e d6 ae 00 46  .ppc..k.m_.....F
+0090  13 02 13 03 13 01 13 04 c0 2c c0 30 cc a9 cc a8  .........,.0....
+00a0  c0 ad c0 2b c0 2f c0 ac c0 23 c0 27 c0 0a c0 14  ...+./...#.'....
+00b0  c0 09 c0 13 00 9d c0 9d 00 9c c0 9c 00 3d 00 3c  .............=.<
+00c0  00 35 00 2f 00 9f cc aa c0 9f 00 9e c0 9e 00 6b  .5./...........k
+00d0  00 67 00 39 00 33 01 00 05 8f ff 01 00 01 00 00  .g.9.3..........
+00e0  00 00 10 00 0e 00 00 0b 6e 65 74 6d 6f 6e 2e 74  ........netmon.t
+00f0  65 73 74 00 0b 00 04 03 00 01 02 00 0a 00 1c 00  est.............
+0100  1a 11 ec 11 eb 11 ed 00 1d 00 17 00 1e 00 19 00  ................
+0110  18 01 00 01 01 01 02 01 03 01 04 00 10 00 0e 00  ................
+0120  0c 02 68 32 08 68 74 74 70 2f 31 2e 31 00 16 00  ..h2.http/1.1...
+0130  00 00 17 00 00 00 31 00 00 00 0d 00 28 00 26 09  ......1.....(.&.
+0140  04 09 05 09 06 04 03 05 03 06 03 08 07 08 08 08  ................
+0150  09 08 0a 08 0b 08 04 08 05 08 06 04 01 05 01 06  ................
+0160  01 03 03 03 01 00 2b 00 05 04 03 04 03 03 00 2d  ......+........-
+0170  00 02 01 01 00 33 04 ea 04 e8 11 ec 04 c0 46 f9  .....3........F.
+0180  25 68 86 16 5c 38 5b 76 64 a9 92 e6 1f 54 59 26  %h..\8[vd....TY&
+0190  e1 fa 8c ab 17 32 39 b3 c7 f5 30 58 33 ab 51 9c  .....29...0X3.Q.
+01a0  e8 b2 92 6b ce 8e b7 52 81 46 6d df 5b 1a 14 b8  ...k...R.Fm.[...
+01b0  b3 bb ac 56 95 b0 8f 65 0c c3 8c 92 bc 3d d9 3e  ...V...e.....=.>
+01c0  86 e3 80 03 47 c8 10 c5 6d a8 d4 75 f3 e8 7f aa  ....G...m..u....
+01d0  30 b1 0b 42 5f 49 db 56 5e 4b 33 53 8c c0 95 bc  0..B_I.V^K3S....
+01e0  3a 4b 02 56 60 f7 16 b6 34 80 be da 2d 56 54 61  :K.V`...4...-VTa
+01f0  72 3b 4b a3 2b 23 d3 88 4f 09 42 b7 35 26 61 db  r;K.+#..O.B.5&a.
+0200  57 a5 92 97 08 ad bb 0d 72 75 7b 4b 7b 47 0c 82  W.......ru{K{G..
+0210  7d 47 42 41 fc 15 64 70 78 a5 c6 51 b2 0c d0 c2  }GBA..dpx..Q....
+0220  23 59 2f 07 c9 57 ef 72 78 3b 02 7b 7b c9 cd c1  #Y/..W.rx;.{{...
+0230  a8 26 ef b0 50 9b 83 83 63 22 24 9b b0 8d 41 fa  .&..P...c"$...A.
+0240  b8 a4 7a 20 47 e6 1a 09 da a1 0b fb ca 23 5a 94  ..z G........#Z.
+0250  6b 2a b8 68 f7 90 cc 85 04 ec 33 9d a2 51 83 39  k*.h......3..Q.9
+0260  73 4a ce 37 23 03 d2 16 71 cb b2 1f 97 64 67 e2  sJ.7#...q....dg.
+0270  04 b6 34 92 ba 22 8e 72 24 8b 73 87 2b 26 91 87  ..4..".r$.s.+&..
+0280  a6 98 cc 1c d1 ab b5 89 0e a6 bb 0b 49 c9 1b 42  ............I..B
+0290  6b 17 5f 59 c2 e2 74 75 52 9a 6d 76 91 ca de 97  k._Y..tuR.mv....
+02a0  8a d8 9a 60 5e 08 ac eb 17 1a de 24 6d 36 6a ad  ...`^......$m6j.
+02b0  40 bc a0 e8 bc 9d 4f 11 97 4b b1 0d f6 bc 84 cb  @.....O..K......
+02c0  f0 a5 4d a8 c0 d9 d9 71 35 d2 17 13 73 09 b5 9b  ..M....q5...s...
+02d0  33 12 d8 a9 3f 69 4b 3f 54 4d 34 a4 5c 98 66 09  3...?iK?TM4.\.f.
+02e0  5c e6 92 f9 84 13 c5 aa c7 a3 9c 69 10 19 07 cd  \..........i....
+02f0  9b bb 18 56 4e db c5 6e bd 9b 50 6a b1 21 29 46  ...VN..n..Pj.!)F
+0300  59 a7 cb 73 2f 90 b1 98 d9 9a b4 27 76 93 18 47  Y..s/......'v..G
+0310  53 93 81 3b 82 83 a5 62 60 a7 3a 4f 3c 2a 34 c4  S..;...b`.:O<*4.
+0320  62 3d a2 81 2e d3 53 89 a8 91 8f d3 fc 91 bc e1  b=....S.........
+0330  65 f6 32 09 c7 d0 6a 94 5a 18 75 40 2b 32 68 03  e.2...j.Z.u@+2h.
+0340  50 15 b8 5c 35 a1 f7 28 02 1d 77 07 b8 4a 91 22  P..\5..(..w..J."
+0350  ec 9d 9b c1 ad d3 08 a7 f8 47 c2 3a f1 10 20 31  .........G.:.. 1
+0360  a1 6c 18 97 69 4a 09 69 d3 23 9d 03 b4 67 22 82  .l..iJ.i.#...g".
+0370  2e d7 84 04 44 7d a6 b9 8c 30 02 a3 5b d8 47 03  ....D}...0..[.G.
+0380  90 27 d3 88 39 6b 11 7d 53 b3 c9 e1 46 aa 24 ba  .'..9k.}S...F.$.
+0390  27 2a 19 be 80 f3 a9 30 15 94 8a 73 1d d3 21 34  '*.....0...s..!4
+03a0  44 43 a1 fe d9 6e 55 e7 2d 79 99 72 f5 ca b3 6a  DC...nU.-y.r...j
+03b0  f9 32 8a 42 a5 83 e0 66 24 40 0c b6 e3 4a 69 11  .2.B...f$@...Ji.
+03c0  85 c1 a4 a1 56 84 6e 9f 55 32 55 03 45 be 31 7f  ....V.n.U2U.E.1.
+03d0  78 87 29 70 00 7e d1 f9 42 90 d7 bc 59 e3 c0 5c  x.)p.~..B...Y..\
+03e0  8b c3 b9 23 cc 04 ab c3 24 43 38 4b ea af 85 76  ...#....$C8K...v
+03f0  2d de 74 20 13 90 26 a0 82 9b ca db c3 8b d4 34  -.t ..&........4
+0400  ca 83 71 c8 db 8d a1 92 42 8d c2 5d e6 71 46 e2  ..q.....B..].qF.
+0410  29 7d b0 68 1b 07 dc 07 6b 53 b6 88 b4 9d c5 33  )}.h....kS.....3
+0420  79 cf 2a 3d 14 c4 76 7c c1 2c bb 08 7f ad e1 5a  y.*=..v|.,.....Z
+0430  88 a0 84 19 a0 77 0b 76 a5 a3 0c 6d 59 47 0a 42  .....w.v...mYG.B
+0440  dc bd f9 e0 4e 02 28 5f 2a 8a 21 34 49 2c 43 31  ....N.(_*.!4I,C1
+0450  6c 18 fa ba 3d 25 6b 48 d0 4c 9c f2 54 4f 33 7b  l...=%kH.L..TO3{
+0460  3e e1 95 af 33 07 26 70 c6 59 19 a9 1e 7b 4b 60  >...3.&p.Y...{K`
+0470  1c 37 83 4b 9d 1b 37 45 83 62 54 27 c2 09 43 a8  .7.K..7E.bT'..C.
+0480  98 6b e1 14 e1 36 b5 56 c6 32 91 42 bd 67 51 52  .k...6.V.2.B.gQR
+0490  e8 30 44 c1 69 5e d8 f8 2a 66 52 1d 12 27 b5 27  .0D.i^..*fR..'.'
+04a0  83 a4 5c b9 27 00 44 64 ad 97 92 3d b7 ad e2 b9  ..\.'.Dd...=....
+04b0  15 41 f1 58 7f 54 50 81 51 06 7a 77 b0 fd 02 2c  .A.X.TP.Q.zw...,
+04c0  d2 95 be df 6a 7e 37 19 6f 6d a2 7d 3c 10 33 c8  ....j~7.om.}<.3.
+04d0  42 bb 13 fc 45 1f c8 9f 87 90 25 80 30 cd 99 72  B...E.....%.0..r
+04e0  05 6b d5 b0 c8 c4 32 f7 e6 2d 78 28 bc b0 e8 85  .k....2..-x(....
+04f0  ee 0c 4f 22 fa a4 62 48 b9 e2 20 49 03 aa 36 f0  ..O"..bH.. I..6.
+0500  75 cc 3d 17 aa 65 aa 0d ee 00 48 f0 72 0e b3 01  u.=..e....H.r...
+0510  a6 86 98 01 08 34 3b 17 ec cb 87 ab 07 40 71 c8  .....4;......@q.
+0520  99 22 ad f2 a6 a0 ee a1 54 be c2 0b 45 bb 61 0e  ."......T...E.a.
+0530  f0 94 7b 10 65 86 10 bd 3f 6c 4c 79 d8 a6 0a d3  ..{.e...?lLy....
+0540  75 97 90 9f ba 1a 62 b0 56 88 63 36 7e 42 8a 55  u.....b.V.c6~B.U
+0550  34 c0 5f 68 68 00 e6 05 30 04 40 9b 27 e4 be 3d  4._hh...0.@.'..=
+0560  eb c0 2f 29 a4 f2 43 2c 7b 30 98 0c a9 94 f5 24  ../)..C,{0.....$
+0570  9d d8 72 9c 04 81 00 76 f3 71 99 11 48 9f c1 08  ..r....v.q..H...
+0580  54 56 15 bd c7 80 77 2a 89 20 5b 34 73 d4 4d a7  TV....w*. [4s.M.
+0590  03 0a 28 ec 05 5e 12 94 a0 06 ce 5d ac 33 89 b3  ..(..^.....].3..
+05a0  62 84 43 95 ea 99 06 ac c6 8a 01 8a 33 40 64 2f  b.C.........3@d/
+05b0  1b c7 58 a7 81 29 21 31 24 9b ec b2 25 86 32 54  ..X..)!1$...%.2T
+05c0  56 59 b2 52 9e 49 27 af 61 d7 bd e7 10 54 96 c1  VY.R.I'.a....T..
+05d0  22 42 ec 02 24 34 0e 71 f2 a9 7e 15 18 23 e4 36  "B..$4.q..~..#.6
+05e0  af e2 75 84 b2 48 79 e7 cb 53 49 67 d1 89 a7 94  ..u..Hy..SIg....
+05f0  d8 98 83 f1 03 b5 c1 05 70 60 ba 9b a6 9f 8b 1d  ........p`......
+0600  21 13 11 d6 a2 cd 95 df 66 54 0d 14 f7 d6 c4 00  !.......fT......
+0610  a6 17 55 0b 88 dd 88 85 94 b1 a6 c1 6e ac e0 b0  ..U.........n...
+0620  8d 12 1c 5c a1 ca 62 14 28 55 41 68 44 4d e6 c5  ...\..b.(UAhDM..
+0630  6f 0c 38 2f a8 b2 a1 79 be 6b 6d 50 f8 5a 00 1d  o.8/...y.kmP.Z..
+0640  00 20 a3 29 b0 86 84 76 61 aa 13 11 88 69 59 64  . .)...va....iYd
+0650  89 7e 1e 7d 62 ac 8a 52 83 26 ad 3f f6 25 62 01  .~.}b..R.&.?.%b.
+0660  8f 36 00 1b 00 03 02 00 01                       .6.......

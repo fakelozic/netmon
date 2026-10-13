@@ -1,0 +1,302 @@
+/* Keeps the application inside the viewport; only designated panes can scroll.
+   Packet and connection layouts live beside their views; tokens come from index.css.
+   Start with app-shell and view-content for the height containment chain. */
+@import './views/packets/packets.css';
+@import './views/connections/connections.css';
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+.app-shell {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 12px 12px;
+  gap: 6px;
+  overflow: hidden;
+}
+/* Every flex child in the height chain must be allowed to shrink below its content. */
+.app-tabs,
+.view-content {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.app-tabs {
+  display: flex;
+  flex-direction: column;
+}
+.view-content[data-state='active'] {
+  display: flex;
+  flex-direction: column;
+}
+.view-content[data-state='inactive'] {
+  display: none;
+}
+.scroll-view {
+  overflow: auto;
+}
+.session-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+h1 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+}
+h2 {
+  font-size: 15px;
+  font-weight: 600;
+}
+h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 650;
+}
+h4 {
+  font-size: 14px;
+  font-weight: 600;
+}
+h5 {
+  font-size: 12px;
+  font-weight: 650;
+  margin-top: 14px;
+  margin-bottom: 5px;
+}
+.source {
+  flex: 1;
+  min-width: 30px;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--muted-foreground);
+  font-size: 12px;
+}
+.header-actions,
+.metrics,
+.rate,
+.list-toolbar,
+.detail-heading,
+.story-heading,
+.alert-heading,
+.tab-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-actions {
+  margin-left: auto;
+  gap: 6px;
+}
+.metrics {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  gap: 12px;
+}
+.metrics strong {
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+.rate {
+  font-size: 11px;
+  color: #0d9488;
+  gap: 4px;
+}
+.rate svg {
+  width: 64px;
+  height: 26px;
+}
+.tab-toolbar {
+  justify-content: space-between;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+  height: 40px;
+}
+.tab-count {
+  font-size: 11px;
+  padding: 1px 5px;
+  background: var(--muted);
+  border-radius: 10px;
+}
+.list-toolbar {
+  justify-content: space-between;
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--muted-foreground);
+}
+.header-skeleton {
+  height: 56px;
+  flex-shrink: 0;
+}
+.detail-skeleton {
+  height: 100%;
+}
+.empty-message {
+  color: var(--muted-foreground);
+  padding: 20px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.glossary-word {
+  border-bottom: 1px dotted currentColor;
+  cursor: help;
+}
+.proto-tcp {
+  color: #2563eb;
+}
+.proto-udp {
+  color: #c2410c;
+}
+.proto-dns {
+  color: #047857;
+}
+.proto-http {
+  color: #9f1239;
+}
+.proto-tls {
+  color: #7e22ce;
+}
+.proto-icmp {
+  color: #0e7490;
+}
+.dark .proto-tcp {
+  color: #93c5fd;
+}
+.dark .proto-udp {
+  color: #fdba74;
+}
+.dark .proto-dns {
+  color: #6ee7b7;
+}
+.dark .proto-http {
+  color: #fda4af;
+}
+.dark .proto-tls {
+  color: #d8b4fe;
+}
+.dark .proto-icmp {
+  color: #67e8f9;
+}
+.alerts-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  padding: 12px 0;
+}
+.alert-heading {
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.alert-text {
+  margin-bottom: 15px;
+  overflow-wrap: anywhere;
+}
+.alert-text h3 {
+  margin-bottom: 6px;
+}
+.alert-text p {
+  line-height: 1.7;
+  font-size: 13px;
+}
+.glossary-view {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  width: min(100%, 960px);
+  margin: 12px auto 0;
+}
+.glossary-view label {
+  font-size: 12px;
+}
+.glossary-view input {
+  flex-shrink: 0;
+  margin: 8px 0 12px;
+}
+.glossary-view dl {
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 4px;
+}
+.glossary-view dl > div {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.glossary-view [data-selected='true'] {
+  box-shadow: inset 3px 0 #0d9488;
+  background: var(--muted);
+}
+.glossary-view dt {
+  font-weight: 650;
+  margin-bottom: 8px;
+}
+.glossary-view dd {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted-foreground);
+}
+:focus-visible {
+  outline: 2px solid #0d9488;
+  outline-offset: 2px;
+}
+@media (max-width: 1399px) {
+  .extra-metric {
+    display: none;
+  }
+}
+@media (max-width: 1023px) {
+  .metrics {
+    gap: 6px;
+  }
+  .rate svg {
+    display: none;
+  }
+  .session-header {
+    gap: 6px;
+  }
+}
+@media (max-width: 767px) {
+  .metrics {
+    display: none;
+  }
+  .glossary-view dl {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 599px) {
+  .rate {
+    display: none;
+  }
+  .alerts-view {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

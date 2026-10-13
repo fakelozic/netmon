@@ -1,0 +1,8 @@
+dist
+dist-mock
+src/components/ui
+# These files are outside this task's ownership.
+AGENTS.md
+nub.lock
+
+.build

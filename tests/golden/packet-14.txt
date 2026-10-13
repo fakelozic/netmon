@@ -1,0 +1,178 @@
+   No        Time  From                   To                     Proto    Bytes  What is happening
+   14    1.577348  127.0.0.53:53          127.0.0.2:44337        DNS         115  Answer: www.github.com is 20.207.73.82 (via github.com)
+      Ethernet  [0..14]  00:00:00:00:00:00 → 00:00:00:00:00:00, type=0x0800
+        Destination MAC  [0..6]  00:00:00:00:00:00
+            What: Helps deliver this packet to a device or listening group on the local network, using its hardware address (MAC address).
+            Here: All zeros: no device address is supplied.
+        Source MAC  [6..12]  00:00:00:00:00:00
+            What: Gives the sending device's hardware address (MAC address) on this local network, so local replies can find it.
+            Here: All zeros: no device address is supplied.
+        EtherType  [12..14]  0x0800
+            What: Tells the receiver which kind of packet is inside this Ethernet packet, such as IPv4 or ARP.
+            Here: 0x0800 selects IPv4.
+      IPv4  [14..34]  127.0.0.53 → 127.0.0.2, ttl=1 len=101
+        Version  [14..15]  4
+            What: Tells the receiver which IP rules to use to read the packet.
+            Here: 4 selects IPv4 header rules.
+        Header length  [14..15]  20
+            What: Tells the receiver where the IPv4 header ends and the carried data begins.
+            Here: 20 bytes: the fixed 20-byte header plus 0 bytes of extra settings.
+        Differentiated services code point  [15..16]  0
+            What: Asks routers to give this packet a particular priority or handling policy.
+        Explicit congestion notification  [15..16]  0
+            What: Lets a router mark a packet when it is too busy, so the computers can slow down without losing that packet.
+            Here: This packet does not support a router marking it to report too much traffic.
+        Total length  [16..18]  101
+            What: Tells the receiver how many bytes belong to this IPv4 packet, including its header.
+            Here: 101 bytes belong to this IPv4 packet. The Ethernet or capture header is extra.
+        Identification  [18..20]  0x7207
+            What: Helps the receiver join pieces of a split packet, called fragments, back together.
+        Flags  [20..22]  0x4000 [DF]
+            What: Controls whether routers may split this packet and whether more pieces follow.
+          Don't fragment  [20..22]  1
+              What: Tells routers to drop the packet if it is too large for the next link, instead of splitting it.
+              Here: Set. A router must drop this packet if its next link needs smaller packets.
+              Why:  A rejection can reveal a path's size limit.
+          More fragments  [20..22]  0
+              What: Tells the receiver that more pieces of this split IPv4 packet follow.
+              Here: Not set.
+        Fragment offset  [20..22]  0
+            What: Tells the receiver where these data bytes fit in the original packet, measured in bytes.
+            Here: These data bytes start at the beginning of the original packet. This can be an unsplit packet or its first piece.
+        Time to live  [22..23]  1
+            What: Stops packets circling forever. Each router lowers this counter and drops the packet if it reaches zero.
+            Here: The counter is 1, so a router cannot forward this packet. A deliberately small starting count is possible, so this does not show how far it travelled.
+            Why:  A changed count from the same computer may suggest a route change. The starting count can also change.
+        Protocol  [23..24]  17
+            What: Tells the receiver what kind of data follows the IPv4 header, such as TCP or UDP.
+            Here: 17 tells the receiver to read UDP next.
+        Header checksum  [24..26]  0x094a (correct)
+            What: Helps detect damaged IPv4 header bytes using a calculated check number, called a checksum.
+            Here: 0x094a (correct). netmon checks the IPv4 header bytes, including this checksum, but not the carried data.
+            Why:  An incorrect result suggests damaged header bytes or a checksum filled after capture. It does not check the carried data or prove who sent the packet.
+        Source IP address  [26..30]  127.0.0.53
+            What: Gives the IP address the packet claims to come from, so a reply can be sent back.
+            Here: 127.0.0.53 is loopback: traffic stays on this computer.
+            Why:  The address alone does not authenticate the sender.
+        Destination IP address  [30..34]  127.0.0.2
+            What: Gives the IP address routers use to deliver this packet to its destination.
+            Here: 127.0.0.2 is loopback: traffic stays on this computer.
+      UDP  [34..42]  53 → 44337, len=81
+        Source port  [34..36]  53
+            What: Identifies the sending program's port. The IP address finds the computer, and the port helps find the program on it.
+            Here: Port 53 is usually used for DNS. A program can use a different port, so this is a clue about the service.
+        Destination port  [36..38]  44337
+            What: Helps deliver data to the right program. The IP address finds the computer, and the port helps find the program on it.
+            Here: Port 44337 has no usual service listed in netmon. It may be chosen by the program or temporarily assigned by the operating system.
+        Length  [38..40]  81
+            What: Tells the receiver how many bytes belong to this UDP packet, including its eight-byte header.
+            Here: 81 bytes: 8 header bytes and 73 payload bytes.
+        Checksum  [40..42]  0xfe99
+            What: Helps detect damaged UDP header or data bytes using a calculated check number, called a checksum. It also covers the IP addresses.
+            Here: 0xfe99 has not been checked by netmon. A network card may calculate it after capture, so an outgoing packet can appear to have a bad checksum.
+            Why:  A checksum can detect accidental damage, but it does not prove who sent the packet.
+        Payload size  [42..115]  73
+            What: Shows how many data bytes the UDP header declares. A cut-short capture may contain fewer bytes.
+      DNS  [42..115]  id=0x6bab flags=0x8180
+        Transaction identifier  [42..44]  0x6bab
+            What: Labels a name lookup so the client can recognise the reply to its question.
+        Flags  [44..46]  0x8180 [QR, RD, RA]
+            What: Tells the client or server whether this is a question or reply and how the lookup is handled.
+          Query or response  [44..46]  1
+              What: Distinguishes a name-lookup question from a reply.
+              Here: Set. This is a reply to a name lookup.
+          Operation code  [44..46]  0
+              What: Tells the server what kind of name operation the client wants, usually a lookup.
+              Here: This is a standard name lookup.
+          Authoritative answer  [44..46]  0
+              What: Says the replying server is responsible for the queried name. This is called an authoritative answer.
+              Here: Not set.
+          Truncated response  [44..46]  0
+              What: Warns that the server left out part of the reply because it did not fit.
+              Here: Not set.
+          Recursion desired  [44..46]  1
+              What: Asks the server to contact other name servers if needed to find the answer.
+              Here: Set. The client asks the server to find an answer using other name servers if needed.
+          Recursion available  [44..46]  1
+              What: Tells the client that this server can contact other name servers to find answers.
+              Here: Set. The server offers to find answers using other name servers.
+          Response code  [44..46]  0
+              What: Tells the client whether the name operation succeeded or why it failed.
+              Here: 0 means success.
+        Question count  [46..48]  1
+            What: Tells the server how many lookup questions follow the header.
+        Answer count  [48..50]  2
+            What: Tells the client how many answer records follow. A record is one named piece of DNS information.
+        Authority count  [50..52]  0
+            What: Counts records pointing to responsible name servers or describing the part of DNS they manage.
+        Additional count  [52..54]  1
+            What: Counts extra records that help use the answer, such as a name server's IP address.
+        Question  [54..74]  www.github.com
+            What: Asks for a particular kind of information about a name, such as its IPv4 address.
+          Name  [54..70]  www.github.com
+              What: Identifies the name being looked up or described by this DNS record.
+          Record type  [70..72]  1
+              What: Tells the reader what kind of information is requested or supplied, such as an address or another name.
+              Here: A: an IPv4 address.
+          Record class  [72..74]  1
+              What: Selects which set of DNS naming rules applies. Class 1 is the usual Internet class, for both IPv4 and IPv6.
+              Here: Class 1 uses Internet DNS rules. It covers both IPv4 and IPv6 address records.
+        Resource record  [74..88]  www.github.com type=5 github.com
+            What: Gives one piece of information about a name. Most records also say how long a saved copy can be kept.
+          Name  [74..76]  www.github.com
+              What: Identifies the name being looked up or described by this DNS record.
+          Record type  [76..78]  5
+              What: Tells the reader what kind of information is requested or supplied, such as an address or another name.
+              Here: CNAME: an alias to another name.
+          Record class  [78..80]  1
+              What: Selects which set of DNS naming rules applies. Class 1 is the usual Internet class, for both IPv4 and IPv6.
+              Here: Class 1 uses Internet DNS rules. It covers both IPv4 and IPv6 address records.
+          Record time to live  [80..84]  423
+              What: Limits how long a saved DNS answer may be reused, measured in seconds. It does not count routers like the IP TTL.
+              Here: A saved copy of this answer may be reused for 423 seconds.
+          Record data  [86..88]  github.com
+              What: Gives the answer's information, such as an IP address, another name, or text.
+        Resource record  [88..104]  github.com type=1 20.207.73.82
+            What: Gives one piece of information about a name. Most records also say how long a saved copy can be kept.
+          Name  [88..90]  github.com
+              What: Identifies the name being looked up or described by this DNS record.
+          Record type  [90..92]  1
+              What: Tells the reader what kind of information is requested or supplied, such as an address or another name.
+              Here: A: an IPv4 address.
+          Record class  [92..94]  1
+              What: Selects which set of DNS naming rules applies. Class 1 is the usual Internet class, for both IPv4 and IPv6.
+              Here: Class 1 uses Internet DNS rules. It covers both IPv4 and IPv6 address records.
+          Record time to live  [94..98]  52
+              What: Limits how long a saved DNS answer may be reused, measured in seconds. It does not count routers like the IP TTL.
+              Here: A saved copy of this answer may be reused for 52 seconds.
+          Record data  [100..104]  20.207.73.82
+              What: Gives the answer's information, such as an IP address, another name, or text.
+        Resource record  [104..115]  . type=41 udp=65494 version=0 flags=0x0000
+            What: Gives one piece of information about a name. Most records also say how long a saved copy can be kept.
+            Here: This record advertises Domain Name System extensions. It is not a cached name answer.
+          Name  [104..105]  .
+              What: Identifies the name being looked up or described by this DNS record.
+              Here: This is the root of the Domain Name System name tree.
+          Record type  [105..107]  41
+              What: Tells the reader what kind of information is requested or supplied, such as an address or another name.
+              Here: OPT: extended Domain Name System capabilities.
+          Extended UDP size  [107..109]  65494
+              What: Tells the other computer the largest DNS message this computer can receive over UDP, measured in bytes.
+          Extended response code  [109..113]  0
+              What: Adds more bits to the lookup result code so DNS can report additional kinds of errors.
+          Extension version  [109..113]  0
+              What: Tells the other computer which version of the extra DNS features is used.
+          Extension flags  [109..113]  0x0000 []
+              What: Carries extra DNS controls, such as asking for DNSSEC records used to check signed answers.
+              Here: Not set.
+          Record data  [115..115]  
+              What: Gives the answer's information, such as an IP address, another name, or text.
+              Here: No record data bytes are present.
+0000  00 00 00 00 00 00 00 00 00 00 00 00 08 00 45 00  ..............E.
+0010  00 65 72 07 40 00 01 11 09 4a 7f 00 00 35 7f 00  .er.@....J...5..
+0020  00 02 00 35 ad 31 00 51 fe 99 6b ab 81 80 00 01  ...5.1.Q..k.....
+0030  00 02 00 00 00 01 03 77 77 77 06 67 69 74 68 75  .......www.githu
+0040  62 03 63 6f 6d 00 00 01 00 01 c0 0c 00 05 00 01  b.com...........
+0050  00 00 01 a7 00 02 c0 10 c0 10 00 01 00 01 00 00  ................
+0060  00 34 00 04 14 cf 49 52 00 00 29 ff d6 00 00 00  .4....IR..).....
+0070  00 00 00                                         ...

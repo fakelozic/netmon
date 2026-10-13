@@ -1,0 +1,30 @@
+Warning: Port scan pattern from 8.8.8.8
+Packets: 1 to 20
+Seen: 8.8.8.8 sends TCP connection requests or UDP packets to 20 different ports on 10.0.0.2 within the last 10.0 s.
+Why: TCP opens a reliable byte stream and UDP sends independent messages to ports, the numbered entry points for network services. Trying many ports quickly can reveal which services are listening. Diagnostic tools and software on your own computer can also do this, so the pattern does not prove an attack.
+Next: Check whether you or an administrator ran a service discovery tool, and inspect the first and triggering packets for the destination ports.
+
+Serious: Unencrypted HTTP login pattern at 10.0.0.53
+Packets: 30 to 30
+Seen: Server 10.0.0.53, port 80. An HTTP request carries an authorization header. Login credentials are sent without encryption, and their values are hidden.
+Why: HTTP carries web requests and replies. Without Transport Layer Security (TLS), someone who can read this traffic can copy the login credentials. This observation shows exposed credentials, not that someone has used them.
+Next: Check that the client uses HTTPS, which protects HTTP with TLS, before sending credentials. Check the server or proxy configuration for an encrypted login endpoint.
+
+Serious: ARP mapping changes for 10.0.0.1 (gateway)
+Packets: 40 to 41
+Seen: ARP now associates 10.0.0.1 with 02:00:00:00:00:02, after previously associating it with 02:00:00:00:00:01.
+Why: Address Resolution Protocol (ARP) maps an IPv4 address to a MAC address, the address used to reach a device on the local link. A changed mapping can redirect traffic to a different device. It also happens innocently when a device is replaced or an address is reassigned.
+Next: Compare both MAC addresses with the device or router's settings and check for a planned replacement or address reassignment. Repeated switching without an expected change deserves investigation.
+
+Notice: Unusual DNS name from 10.0.0.2
+Packets: 50 to 50
+Seen: 10.0.0.2 sends a DNS query, a request to look up a name, with 37 characters in the name and 32 in its longest label (the part between dots). A 32-character label has 5.00 bits per character of entropy, a measure of character variety.
+Why: DNS tunnelling hides other data inside name lookups to carry it past network controls. Name-guessing malware tries many possible names to find a server it can contact. Content networks also use long random names, and these patterns do not prove either activity.
+Next: Check which program makes these lookups and whether the domain belongs to a service you use. Compare nearby queries and replies to see whether names keep changing or repeatedly fail.
+
+Warning: Accepted inbound connection request from 8.8.8.8
+Packets: 60 to 61
+Seen: 8.8.8.8 sends a TCP SYN connection request to this computer at 10.0.0.2, port 22 (usually SSH). This computer replies with SYN+ACK.
+Why: TCP starts a connection with a SYN request and a SYN+ACK acceptance reply. This reply indicates a listening service accepts a request from a public address, although the final handshake step has not yet been observed. The service may be intentional, so this is not proof of an intrusion.
+Next: Check which program listens on this port and whether you intend it to accept outside connections. Check the host firewall and router forwarding rules for that service.
+

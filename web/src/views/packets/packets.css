@@ -1,0 +1,336 @@
+/* Lays out the packet list above simultaneous field, explanation and byte panes.
+   The outer viewport containment belongs to App.css; primitive styles stay vendored.
+   Start with packet-layout, then detail-columns for independent scrolling. */
+.packets-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  gap: 6px;
+}
+.filter-bar {
+  flex-shrink: 0;
+}
+.filter-bar form {
+  display: flex;
+  gap: 8px;
+}
+.filter-bar input {
+  max-width: 620px;
+}
+.filter-error {
+  color: var(--destructive);
+  padding-top: 6px;
+  font-size: 12px;
+  max-height: 90px;
+  overflow: auto;
+}
+.filter-error pre {
+  white-space: pre;
+}
+.filter-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.filter-words code {
+  padding: 2px 5px;
+  background: var(--muted);
+  border-radius: 3px;
+}
+.packet-layout {
+  flex: 1;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--card);
+}
+.packet-table {
+  height: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+/* The sentence is the flexible column; optional columns leave before it can be pushed offscreen. */
+.packet-columns {
+  display: grid;
+  grid-template-columns:
+    48px 92px minmax(90px, 140px) minmax(90px, 140px) 80px 68px minmax(120px, 1fr)
+    52px;
+  align-items: center;
+  font-size: 12px;
+  padding: 0 8px;
+  column-gap: 6px;
+}
+.packet-columns > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.table-heading {
+  height: 34px;
+  flex-shrink: 0;
+  font-weight: 600;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  border-bottom: 1px solid var(--border);
+}
+.packet-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: auto;
+  font-variant-numeric: tabular-nums;
+}
+.packet-row {
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+.packet-row:hover {
+  background: var(--muted);
+}
+.problem-row {
+  background: color-mix(in srgb, #f59e0b 9%, var(--card));
+  box-shadow: inset 3px 0 #d97706;
+}
+.selected-row {
+  background: color-mix(in srgb, #0d9488 15%, var(--card));
+  box-shadow: inset 3px 0 #0d9488;
+}
+.row-number {
+  padding: 3px;
+  font-variant-numeric: tabular-nums;
+}
+.time-short {
+  display: none;
+}
+.detail-container {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+.packet-detail {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 8px;
+  gap: 8px;
+}
+.detail-heading {
+  flex-shrink: 0;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+.detail-heading h2 {
+  color: var(--foreground);
+}
+.detail-columns {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.85fr) minmax(200px, 1fr) minmax(466px, 1.55fr);
+  gap: 10px;
+}
+.pane-scroll {
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  padding: 4px;
+}
+.layers-pane h3,
+.explain-pane h3,
+.bytes-pane h3 {
+  margin-bottom: 10px;
+  color: var(--muted-foreground);
+}
+.layers-pane > details {
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  margin-bottom: 8px;
+  padding: 8px;
+}
+.layers-pane summary {
+  cursor: pointer;
+  font-size: 12px;
+}
+.layers-pane summary > span {
+  display: block;
+  margin: 4px 0;
+  color: var(--muted-foreground);
+  overflow-wrap: anywhere;
+}
+.layer-about,
+.packet-sentence {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 9px 0;
+  overflow-wrap: anywhere;
+}
+.field-hint {
+  color: var(--muted-foreground);
+  margin-top: 12px;
+}
+.field-tree {
+  margin-left: 6px;
+  font-size: 12px;
+  border-left: 1px solid var(--border);
+  padding-left: 4px;
+}
+.field-tree li {
+  margin: 3px 0;
+}
+.field-tree button {
+  text-align: left;
+  padding: 3px 4px;
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+}
+.field-tree button:hover,
+.selected-field {
+  background: color-mix(in srgb, #0d9488 18%, var(--card));
+}
+.field-tree button span {
+  color: var(--muted-foreground);
+}
+.explain-pane {
+  font-size: 12px;
+  line-height: 1.6;
+  border-left: 1px solid var(--border);
+  padding-left: 10px;
+  overflow-wrap: anywhere;
+}
+.explain-pane code {
+  display: block;
+  margin-top: 6px;
+}
+.bytes-pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  padding: 4px;
+  border-left: 1px solid var(--border);
+}
+.bytes-pane > p {
+  color: var(--muted-foreground);
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+.range-label {
+  font-family: monospace;
+  float: right;
+  text-transform: none;
+  color: #0d9488;
+}
+.hex-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: var(--muted);
+  border-radius: 6px;
+  padding: 6px;
+}
+.hex-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font: 11px/1.5 monospace;
+  white-space: nowrap;
+}
+.hex-offset {
+  width: 32px;
+  flex-shrink: 0;
+  color: var(--muted-foreground);
+}
+.hex-column {
+  width: 272px;
+  flex-shrink: 0;
+  display: flex;
+}
+.hex-column button {
+  width: 17px;
+  height: 23px;
+  flex-shrink: 0;
+}
+.ascii-column {
+  width: 112px;
+  flex-shrink: 0;
+  display: flex;
+}
+.ascii-column button {
+  width: 7px;
+  height: 23px;
+  flex-shrink: 0;
+}
+.byte-highlight {
+  background: #0f766e;
+  color: white;
+  font-weight: bold;
+  border-radius: 2px;
+}
+.detail-tabs {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.detail-tab {
+  min-height: 0;
+  overflow: hidden;
+}
+.detail-tab[data-state='active'] {
+  display: flex;
+}
+.detail-tab > section {
+  flex: 1;
+}
+/* Drop Bytes, then App, then the final three Time decimals as the viewport narrows. */
+@media (max-width: 1199px) {
+  .packet-bytes {
+    display: none;
+  }
+  .packet-columns {
+    grid-template-columns: 48px 92px minmax(90px, 130px) minmax(90px, 130px) 80px 68px minmax(
+        120px,
+        1fr
+      );
+  }
+}
+@media (max-width: 1023px) {
+  .packet-app {
+    display: none;
+  }
+  .packet-columns {
+    grid-template-columns: 48px 92px minmax(80px, 120px) minmax(80px, 120px) 68px minmax(120px, 1fr);
+  }
+}
+@media (max-width: 899px) {
+  .time-full {
+    display: none;
+  }
+  .time-short {
+    display: inline;
+  }
+  .packet-columns {
+    grid-template-columns: 40px 64px minmax(60px, 100px) minmax(60px, 100px) 60px minmax(100px, 1fr);
+  }
+}
+@media (max-width: 599px) {
+  .packet-columns {
+    grid-template-columns: 28px 44px minmax(30px, 1fr) minmax(30px, 1fr) 45px minmax(75px, 1.5fr);
+    padding: 0 4px;
+    column-gap: 3px;
+    font-size: 10px;
+  }
+  .detail-heading > span {
+    display: none;
+  }
+  .list-toolbar {
+    font-size: 10px;
+  }
+}

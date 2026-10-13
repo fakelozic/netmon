@@ -1,0 +1,40 @@
+netmon FILE  75 packets / 75 shown  3.044691 s  17,764 bytes
+loopback-mixed.pcapng  filter: all
+[1] Packets                                                                                                             ? help  g glossary
+┌Packets───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│No    Time         From                  To                    Proto   Bytes  What is happening                                           │
+│ 1    0.000000     127.0.0.1             127.0.0.2             ICMP    98     Ping request (seq 1)                                        │
+│ 2    0.000014     127.0.0.2             127.0.0.1             ICMP    98     Ping reply (seq 1)                                          │
+│ 3    0.301174     127.0.0.1             127.0.0.2             ICMP    98     Ping request (seq 2)                                        │
+│ 4    0.301229     127.0.0.2             127.0.0.1             ICMP    98     Ping reply (seq 2)                                          │
+│ 5    0.503239     ::1                   ::1                   ICMPv6  118    Ping request (seq 1)                                        │
+│ 6    0.503252     ::1                   ::1                   ICMPv6  118    Ping reply (seq 1)                                          │
+│ 7    0.806131     ::1                   ::1                   ICMPv6  118    Ping request (seq 2)                                        │
+│ 8    0.806146     ::1                   ::1                   ICMPv6  118    Ping reply (seq 2)                                          │
+│ ┌Glossary - type to search; Esc closes─────────────────────────────────────────────────────────────────────────────────────────────────┐ │
+│ │Filter: ttl                                                                                                                           │ │
+│ │cache                                                                                                                                 │ │
+│ │A saved copy of information that can be reused instead of asking again. DNS record TTL tells you how long an answer may stay in a     │…│
+│ │cache.                                                                                                                                │ │
+│ │IPv4                                                                                                                                  │ │
+│ │The IP version using 32-bit addresses written like 192.168.1.2. netmon shows a header checksum and TTL in its fields.                 │…│
+│ │router                                                                                                                                │…│
+│>│A device that forwards IP packets between networks. A packet's TTL or hop limit decreases as routers forward it.                      │ │
+└─│TTL                                                                                                                                   │─┘
+Op│IPv4's counter preventing packets from circling forever. Each router lowers it, while the similarly named DNS record TTL limits how   │
+┌L│long a saved answer can be reused.                                                                                                    │─┐
+│ └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘ │
+│ ▸ IPv4: 20 bytes                                  ││What: Tells the other computer whether to open or close a connection, confirm        │
+│ ▾ TCP: 40 bytes                                   ││receipt, or handle data specially.                                                   │
+│     Source port: 51008                            ││                                                                                     │
+│     Destination port: 18080                       ││                                                                                     │
+│     Sequence number: 1455604178                   ││                                                                                     │
+│     Acknowledgment number: 0                      ││                                                                                     │
+│     Data offset: 40                               ││                                                                                     │
+│>  ▸ Flags: 0x0002 [SYN]                           ││                                                                                     │
+└───────────────────────────────────────────────────┘└─────────────────────────────────────────────────────────────────────────────────────┘
+┌Bytes─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│0020  00 02 c7 40 46 a0 56 c2 c1 d2 00 00 00 00 a0 02  ...@F.V.........                                                                   │
+│0030  ff d7 fe 31 00 00 02 04 ff d7 04 02 08 0a 62 28  ...1..........b(                                                                   │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+/ filter   f conversation   c clear   Space pause   Tab pane   q quit

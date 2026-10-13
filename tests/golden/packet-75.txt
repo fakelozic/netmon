@@ -1,0 +1,141 @@
+   No        Time  From                   To                     Proto    Bytes  What is happening
+   75    3.044691  127.0.0.2              127.0.0.1              ICMP         76  Cannot deliver: nothing listens on that port — about a UDP packet to port 18998
+      Ethernet  [0..14]  00:00:00:00:00:00 → 00:00:00:00:00:00, type=0x0800
+        Destination MAC  [0..6]  00:00:00:00:00:00
+            What: Helps deliver this packet to a device or listening group on the local network, using its hardware address (MAC address).
+            Here: All zeros: no device address is supplied.
+        Source MAC  [6..12]  00:00:00:00:00:00
+            What: Gives the sending device's hardware address (MAC address) on this local network, so local replies can find it.
+            Here: All zeros: no device address is supplied.
+        EtherType  [12..14]  0x0800
+            What: Tells the receiver which kind of packet is inside this Ethernet packet, such as IPv4 or ARP.
+            Here: 0x0800 selects IPv4.
+      IPv4  [14..34]  127.0.0.2 → 127.0.0.1, ttl=64 len=62
+        Version  [14..15]  4
+            What: Tells the receiver which IP rules to use to read the packet.
+            Here: 4 selects IPv4 header rules.
+        Header length  [14..15]  20
+            What: Tells the receiver where the IPv4 header ends and the carried data begins.
+            Here: 20 bytes: the fixed 20-byte header plus 0 bytes of extra settings.
+        Differentiated services code point  [15..16]  48
+            What: Asks routers to give this packet a particular priority or handling policy.
+        Explicit congestion notification  [15..16]  0
+            What: Lets a router mark a packet when it is too busy, so the computers can slow down without losing that packet.
+            Here: This packet does not support a router marking it to report too much traffic.
+        Total length  [16..18]  62
+            What: Tells the receiver how many bytes belong to this IPv4 packet, including its header.
+            Here: 62 bytes belong to this IPv4 packet. The Ethernet or capture header is extra.
+        Identification  [18..20]  0xa8e2
+            What: Helps the receiver join pieces of a split packet, called fragments, back together.
+        Flags  [20..22]  0x0000 []
+            What: Controls whether routers may split this packet and whether more pieces follow.
+          Don't fragment  [20..22]  0
+              What: Tells routers to drop the packet if it is too large for the next link, instead of splitting it.
+              Here: Not set.
+              Why:  A rejection can reveal a path's size limit.
+          More fragments  [20..22]  0
+              What: Tells the receiver that more pieces of this split IPv4 packet follow.
+              Here: Not set.
+        Fragment offset  [20..22]  0
+            What: Tells the receiver where these data bytes fit in the original packet, measured in bytes.
+            Here: These data bytes start at the beginning of the original packet. This can be an unsplit packet or its first piece.
+        Time to live  [22..23]  64
+            What: Stops packets circling forever. Each router lowers this counter and drops the packet if it reaches zero.
+            Here: The counter is 64. Systems often start at 64, 128 or 255, so this packet has probably crossed no routers.
+            Why:  A changed count from the same computer may suggest a route change. The starting count can also change.
+        Protocol  [23..24]  1
+            What: Tells the receiver what kind of data follows the IPv4 header, such as TCP or UDP.
+            Here: 1 tells the receiver to read ICMP next.
+        Header checksum  [24..26]  0xd319 (correct)
+            What: Helps detect damaged IPv4 header bytes using a calculated check number, called a checksum.
+            Here: 0xd319 (correct). netmon checks the IPv4 header bytes, including this checksum, but not the carried data.
+            Why:  An incorrect result suggests damaged header bytes or a checksum filled after capture. It does not check the carried data or prove who sent the packet.
+        Source IP address  [26..30]  127.0.0.2
+            What: Gives the IP address the packet claims to come from, so a reply can be sent back.
+            Here: 127.0.0.2 is loopback: traffic stays on this computer.
+            Why:  The address alone does not authenticate the sender.
+        Destination IP address  [30..34]  127.0.0.1
+            What: Gives the IP address routers use to deliver this packet to its destination.
+            Here: 127.0.0.1 is loopback: traffic stays on this computer.
+      ICMP  [34..42]  type=3 code=3
+        Message type  [34..35]  3
+            What: Tells the receiver what this network report is for, such as a ping or a delivery failure.
+            Here: 3 means destination unreachable.
+        Message code  [35..36]  3
+            What: Gives the reason for a network report in more detail, such as which part of delivery failed.
+            Here: 3: nothing listens on that port.
+        Checksum  [36..38]  0xc23b
+            What: Helps detect damaged control-message bytes using a calculated check number, called a checksum.
+            Here: 0xc23b is shown without verification. Only the IPv4 header checksum is checked here.
+        Quoted packet  [42..76]  34 bytes
+            What: Includes part of the packet that caused a delivery error, so the sending computer can recognise the failed traffic.
+          Quoted packet  [42..62]  IPv4 127.0.0.1 → 127.0.0.2, ttl=64 len=34
+              What: Includes part of the packet that caused a delivery error, so the sending computer can recognise the failed traffic.
+            Version  [42..43]  4
+                What: Tells the receiver which IP rules to use to read the packet.
+                Here: 4 selects IPv4 header rules.
+            Header length  [42..43]  20
+                What: Tells the receiver where the IPv4 header ends and the carried data begins.
+                Here: 20 bytes: the fixed 20-byte header plus 0 bytes of extra settings.
+            Differentiated services code point  [43..44]  0
+                What: Asks routers to give this packet a particular priority or handling policy.
+            Explicit congestion notification  [43..44]  0
+                What: Lets a router mark a packet when it is too busy, so the computers can slow down without losing that packet.
+                Here: This packet does not support a router marking it to report too much traffic.
+            Total length  [44..46]  34
+                What: Tells the receiver how many bytes belong to this IPv4 packet, including its header.
+                Here: 34 bytes belong to this IPv4 packet. The Ethernet or capture header is extra.
+            Identification  [46..48]  0xec8f
+                What: Helps the receiver join pieces of a split packet, called fragments, back together.
+            Flags  [48..50]  0x4000 [DF]
+                What: Controls whether routers may split this packet and whether more pieces follow.
+              Don't fragment  [48..50]  1
+                  What: Tells routers to drop the packet if it is too large for the next link, instead of splitting it.
+                  Here: Set. A router must drop this packet if its next link needs smaller packets.
+                  Why:  A rejection can reveal a path's size limit.
+              More fragments  [48..50]  0
+                  What: Tells the receiver that more pieces of this split IPv4 packet follow.
+                  Here: Not set.
+            Fragment offset  [48..50]  0
+                What: Tells the receiver where these data bytes fit in the original packet, measured in bytes.
+                Here: These data bytes start at the beginning of the original packet. This can be an unsplit packet or its first piece.
+            Time to live  [50..51]  64
+                What: Stops packets circling forever. Each router lowers this counter and drops the packet if it reaches zero.
+                Here: The counter is 64. Systems often start at 64, 128 or 255, so this packet has probably crossed no routers.
+                Why:  A changed count from the same computer may suggest a route change. The starting count can also change.
+            Protocol  [51..52]  17
+                What: Tells the receiver what kind of data follows the IPv4 header, such as TCP or UDP.
+                Here: 17 tells the receiver to read UDP next.
+            Header checksum  [52..54]  0x5038 (correct)
+                What: Helps detect damaged IPv4 header bytes using a calculated check number, called a checksum.
+                Here: 0x5038 (correct). netmon checks the IPv4 header bytes, including this checksum, but not the carried data.
+                Why:  An incorrect result suggests damaged header bytes or a checksum filled after capture. It does not check the carried data or prove who sent the packet.
+            Source IP address  [54..58]  127.0.0.1
+                What: Gives the IP address the packet claims to come from, so a reply can be sent back.
+                Here: 127.0.0.1 is loopback: traffic stays on this computer.
+                Why:  The address alone does not authenticate the sender.
+            Destination IP address  [58..62]  127.0.0.2
+                What: Gives the IP address routers use to deliver this packet to its destination.
+                Here: 127.0.0.2 is loopback: traffic stays on this computer.
+          Quoted packet  [62..70]  UDP 44669 → 18998, len=14
+              What: Includes part of the packet that caused a delivery error, so the sending computer can recognise the failed traffic.
+            Source port  [62..64]  44669
+                What: Identifies the sending program's port. The IP address finds the computer, and the port helps find the program on it.
+                Here: Port 44669 has no usual service listed in netmon. It may be chosen by the program or temporarily assigned by the operating system.
+            Destination port  [64..66]  18998
+                What: Helps deliver data to the right program. The IP address finds the computer, and the port helps find the program on it.
+                Here: Port 18998 has no usual service listed in netmon. It may be chosen by the program or temporarily assigned by the operating system.
+            Length  [66..68]  14
+                What: Tells the receiver how many bytes belong to this UDP packet, including its eight-byte header.
+                Here: 14 bytes: 8 header bytes and 6 payload bytes.
+            Checksum  [68..70]  0xfe22
+                What: Helps detect damaged UDP header or data bytes using a calculated check number, called a checksum. It also covers the IP addresses.
+                Here: 0xfe22 has not been checked by netmon. A network card may calculate it after capture, so an outgoing packet can appear to have a bad checksum.
+                Why:  A checksum can detect accidental damage, but it does not prove who sent the packet.
+            Payload size  [70..70]  6
+                What: Shows how many data bytes the UDP header declares. A cut-short capture may contain fewer bytes.
+0000  00 00 00 00 00 00 00 00 00 00 00 00 08 00 45 c0  ..............E.
+0010  00 3e a8 e2 00 00 40 01 d3 19 7f 00 00 02 7f 00  .>....@.........
+0020  00 01 03 03 c2 3b 00 00 00 00 45 00 00 22 ec 8f  .....;....E.."..
+0030  40 00 40 11 50 38 7f 00 00 01 7f 00 00 02 ae 7d  @.@.P8.........}
+0040  4a 36 00 0e fe 22 68 65 6c 6c 6f 0a              J6..."hello.

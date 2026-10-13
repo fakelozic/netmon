@@ -1,0 +1,40 @@
+netmon FILE  75 packets / 75 shown  3.044691 s  17,764 bytes
+loopback-mixed.pcapng  filter: all
+[1] Packets                                                                                                             ? help  g glossary
+┌Packets───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│No    Time         From                  To                    Proto   Bytes  What is happening                                           │
+│ 1    0.000000     127.0.0.1             127.0.0.2             ICMP    98     Ping request (seq 1)                                        │
+│ 2    0.000014     127.0.0.2             127.0.0.1             ICMP    98     Ping reply (seq 1)                                          │
+│ 3    0.301174     127.0.0.1     ┌Help - Esc closes────────────────────────────────────────────────────┐                                  │
+│ 4    0.301229     127.0.0.2     │netmon explains the packets you select.                              │                                  │
+│ 5    0.503239     ::1           │                                                                     │                                  │
+│ 6    0.503252     ::1           │1                 Packets tab                                        │                                  │
+│ 7    0.806131     ::1           │Tab / Shift-Tab   Move between panes; switch details on small screens│                                  │
+│ 8    0.806146     ::1           │Arrows / j k      Move in the focused pane                           │                                  │
+│ 9    1.020843     127.0.0.2:5592│PgUp / PgDn       Move one page                                      │ress of example.com?              │
+│ 10   1.077328     127.0.0.53:53 │Home / End        First / last; End follows new packets              │.66.147.243 (and 1 more)          │
+│ 11   1.292935     127.0.0.2:4889│Enter / Left / Right   Open / close layers and fields                │ress of example.com?              │
+│ 12   1.300109     127.0.0.53:53 │Space             Pause / resume following (capture continues)       │6:4700:8d95:72db:f2de:b99:ef6b:ff…│
+│ 13   1.515748     127.0.0.2:4433│/                 Edit display filter; Enter applies; Esc cancels    │ress of www.github.com?           │
+│ 14   1.577348     127.0.0.53:53 │f                 Filter to this packet's conversation               │20.207.73.82 (via github.com)     │
+│ 15   1.793236     127.0.0.2:3516│c                 Clear the display filter                           │ress of nonexistent-netmon-test.i…│
+│ !16  1.793331     127.0.0.53:53 │t                 Seconds since start / local clock time             │-test.invalid does not exist (NXD…│
+│>17   2.014499     127.0.0.1:5100│i                 Choose capture interface (live mode)               │ handshake 1 of 3                 │
+└─────────────────────────────────│g                 Search the networking glossary                     │──────────────────────────────────┘
+Opens a connection (SYN) — handsha│?                 Open this help                                     │
+┌Layers - TCP─────────────────────│q / Ctrl-C        Quit                                               │──────────────────────────────────┐
+│ ▸ Ethernet: 14 bytes            │                                                                     │                                  │
+│ ▸ IPv4: 20 bytes                │Click selects a row or field. The wheel scrolls its pane.            │lose a connection, confirm        │
+│ ▾ TCP: 40 bytes                 │Display filters: tcp udp icmp arp dns mdns dhcp http tls quic ip ipv6│                                  │
+│     Source port: 51008          │port N, host TEXT, app TEXT, problem, and, or, not, (brackets).      │                                  │
+│     Destination port: 18080     │Other words search the packet sentence. Quotes keep words together.  │                                  │
+│     Sequence number: 1455604178 │This view currently has no learned hostnames or app labels.          │                                  │
+│     Acknowledgment number: 0    │Bytes marked ** and ASCII * hide sensitive HTTP headers.             │                                  │
+│     Data offset: 40             └─────────────────────────────────────────────────────────────────────┘                                  │
+│>  ▸ Flags: 0x0002 [SYN]                           ││                                                                                     │
+└───────────────────────────────────────────────────┘└─────────────────────────────────────────────────────────────────────────────────────┘
+┌Bytes─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│0020  00 02 c7 40 46 a0 56 c2 c1 d2 00 00 00 00 a0 02  ...@F.V.........                                                                   │
+│0030  ff d7 fe 31 00 00 02 04 ff d7 04 02 08 0a 62 28  ...1..........b(                                                                   │
+└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+/ filter   f conversation   c clear   Space pause   Tab pane   q quit
